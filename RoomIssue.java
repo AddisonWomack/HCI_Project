@@ -1,11 +1,25 @@
 package Model;
 
+/*
+    Created by Peter on 3/26/17
+*/
+
 public class RoomIssue {
 
-    private Date issueReportDate;
-    
+    private Date reportDate;
+    private Date resolvedDate;
+    private String description;
+    private boolean ongoing;
 
-    public RoomIssue() {
+    public RoomIssue(Date d, String desc) {
+        reportDate = d;
+        resolvedDate = null;
+        description = desc;
+        ongoing = true;
+    }
     
+    public void resolve(Date d) {
+        resolvedDate = d;
+        ongoing = false;
     }
 }
