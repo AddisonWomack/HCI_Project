@@ -1,4 +1,6 @@
-package Model;
+package src.Model;
+
+import java.util.ArrayList;
 
 /**
  * Created by Addison on 3/24/2017.
@@ -12,9 +14,9 @@ public class Room {
     private String roomNumber;
     private int floorNumber;
     private RoomLayout roomLayout;
-    private List<Amenities> amenityList;
-    private List<RoomIssue> problemHistory;
-    private RoomStatus status;
+    //private List<Amenities> amenityList;
+    private ArrayList<RoomIssue> problemHistory;
+    //private RoomStatus status;
     
     /*
         id is name of the room, (eg. 201A, 304B, etc)
@@ -26,16 +28,17 @@ public class Room {
         roomNumber = id;
         floorNumber = floor;
         roomLayout = rl;
-        amenityList = new List<Amenities>();
-        problemHistory = new List<RoomIssue>();
-        status = RoomStatus.CLOSED;
+        //amenityList = new ArrayList<Amenities>();
+        problemHistory = new ArrayList<RoomIssue>();
+        //status = RoomStatus.CLOSED;
     }
     
     public void changeName(String id, int floor) {
         roomNumber = id;
         floorNumber = floor;
     }
-    
+
+    /*
     public void addAmenity(Amenity a) {
         amenityList.add(a);
     }
@@ -43,11 +46,13 @@ public class Room {
     public List<Amenities> getAmenities() {
         return amenityList;
     }
-    
-    public void addProblem(RoomIssue ri, boolean severe) {
+
+    */
+
+    public void addProblem(RoomIssue ri, boolean isSevere) {
         problemHistory.add(ri);
-        if(severe)
-            status = RoomStatus.CLOSED;
+        //if(isSevere)
+            //status = RoomStatus.CLOSED;
     }
     
     public void setLayout(RoomLayout rl) {
@@ -59,18 +64,18 @@ public class Room {
     }
     
     public void openRoom() {
-        status = RoomStatus.OPEN;
+        //status = RoomStatus.OPEN;
     }
     
     public void checkOut(Guest g, Employee e) {
         guest = g;
         checkedInBy = e;
-        status = RoomStatus.OCCUPIED; //is this the right syntax?
+        //status = RoomStatus.OCCUPIED; //is this the right syntax?
     }
     
     public void checkIn() {
         guest = null;
         checkedInBy = null;
-        status = RoomStatus.OPEN;
+        //status = RoomStatus.OPEN;
     }
 }

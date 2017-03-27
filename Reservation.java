@@ -1,6 +1,7 @@
-package Model;
+package src.Model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Addison on 3/24/2017.
@@ -17,12 +18,12 @@ public class Reservation {
     private Room reserved;
     private Employee completedBy;
     
-    public Reservation(Date s, Date e, Room r, Guest g, Employee e) {
-        start = s;
-        end = e;
-        reservee = g;
-        completedBy = e;
-        reserved = r;
+    public Reservation(Date start, Date end, Room room, Guest guest, Employee employee) {
+        this.start = start;
+        this.end = end;
+        reservee = guest;
+        completedBy = employee;
+        reserved = room;
     }
     
     public Date getStart() {

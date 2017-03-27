@@ -1,4 +1,4 @@
-package Model;
+package src.Model;
 
 /**
  * Created by Addison on 3/24/2017.
