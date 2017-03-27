@@ -1,8 +1,10 @@
-package Model;
+package src.Model;
 
 /*
     Created by Peter on 3/26/17
 */
+
+import java.util.Date;
 
 public class RoomIssue {
 
