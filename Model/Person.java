@@ -1,7 +1,7 @@
-package src.Model;
+package Model;
 
 /**
- * Created by Addison on 3/24/2017.
+ * This abstract class provides basic functionality for both the Guest and Employee classes
  */
 public abstract class Person {
     protected String firstName;
@@ -15,6 +15,8 @@ public abstract class Person {
         this.phoneNumber = phoneNumber;
         this.eMailAddress = eMailAddress;
     }
+
+    // Getter methods
 
     public String getFirstName() {
         return firstName;
@@ -35,6 +37,8 @@ public abstract class Person {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
+    // Setter methods
 
     public void setEMailAddress(String eMailAddress) {
         this.eMailAddress = eMailAddress;

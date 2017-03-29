@@ -1,4 +1,4 @@
-package src.Model;
+package Model;
 
 /*
     Created by Peter on 3/26/17
@@ -11,17 +11,17 @@ public class RoomIssue {
     private Date reportDate;
     private Date resolvedDate;
     private String description;
-    private boolean ongoing;
+    private boolean isOngoing;
 
     public RoomIssue(Date d, String desc) {
         reportDate = d;
         resolvedDate = null;
         description = desc;
-        ongoing = true;
+        isOngoing = true;
     }
     
     public void resolve(Date d) {
         resolvedDate = d;
-        ongoing = false;
+        isOngoing = false;
     }
 }

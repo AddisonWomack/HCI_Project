@@ -1,40 +1,39 @@
-package src.Model;
+package Model;
 
 import java.util.ArrayList;
 
 /**
- * Created by Addison on 3/24/2017.
-   Filled in a bit by Peter on 3/26/17
+ * This class represents a Guest that is staying at the hotel
  */
 public class Guest extends Person {
 
-    /* To Do:
-     * List of Reservations reservations
-     * List of Rooms checkedInRooms */
     private ArrayList<Room> checkedIn;
-    private ArrayList<Reservation> history;
+    private ArrayList<Reservation> reservations;
 
     public Guest(String firstName, String lastName, String eMailAddress, String phoneNumber){
         super(firstName, lastName, eMailAddress, phoneNumber);
-        checkedIn = new ArrayList<Room>();
-        history = new ArrayList<Reservation>();
+        checkedIn = new ArrayList<>();
+        reservations = new ArrayList<>();
     }
-    
+
+    // adds a room to this Guest's checkedIn rooms
     public void addRoom(Room r) {
         checkedIn.add(r);
     }
-    
+
+    // adds a reservation to this Guest's reservations
     public void addReservation(Reservation r) {
-        history.add(r);
+        reservations.add(r);
     }
-    
+
+    // clears the Guest's two ArrayLists
     public void clearRoom(Room r) {
         checkedIn.clear();
-        history.clear();
+        reservations.clear();
     }
-    
-    public ArrayList<Reservation> getHistory() {
-        return history;
+
+    public ArrayList<Reservation> getReservations() {
+        return reservations;
     }
     
     public ArrayList<Room> getRoomsCheckedIn() {

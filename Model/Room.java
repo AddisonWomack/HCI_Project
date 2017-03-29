@@ -1,12 +1,9 @@
-package src.Model;
+package Model;
 
 import java.util.ArrayList;
 
 /**
- * Created by Addison on 3/24/2017.
-   Filled in by Peter on 3/25/17
-       -added variables laid out in UML diagram
-       -added getters and setters where appropriate
+ * This class represents an individual Room within the hotel.
  */
 public class Room {
     private Guest guest;
@@ -14,9 +11,9 @@ public class Room {
     private String roomNumber;
     private int floorNumber;
     private RoomLayout roomLayout;
-    //private List<Amenities> amenityList;
+    private ArrayList<Amenity> amenityList;
     private ArrayList<RoomIssue> problemHistory;
-    //private RoomStatus status;
+    private RoomStatus status;
     
     /*
         id is name of the room, (eg. 201A, 304B, etc)
@@ -28,54 +25,55 @@ public class Room {
         roomNumber = id;
         floorNumber = floor;
         roomLayout = rl;
-        //amenityList = new ArrayList<Amenities>();
+        amenityList = new ArrayList<Amenity>();
         problemHistory = new ArrayList<RoomIssue>();
-        //status = RoomStatus.CLOSED;
-    }
-    
-    public void changeName(String id, int floor) {
-        roomNumber = id;
-        floorNumber = floor;
+        status = RoomStatus.OPEN;
     }
 
-    /*
     public void addAmenity(Amenity a) {
         amenityList.add(a);
     }
     
-    public List<Amenities> getAmenities() {
+    public ArrayList<Amenity> getAmenities() {
         return amenityList;
     }
 
-    */
-
+    // adds a Room Issue to this rooms history and potentially closes the room for Maintenance
     public void addProblem(RoomIssue ri, boolean isSevere) {
         problemHistory.add(ri);
-        //if(isSevere)
-            //status = RoomStatus.CLOSED;
+        if(isSevere)
+            status = RoomStatus.MAINTENANCE;
     }
     
     public void setLayout(RoomLayout rl) {
         roomLayout = rl;
     }
-    
+
+    // extra details about Room can be found within the layout class
     public RoomLayout getLayout() {
         return roomLayout;
     }
     
     public void openRoom() {
-        //status = RoomStatus.OPEN;
+        status = RoomStatus.OPEN;
     }
-    
-    public void checkOut(Guest g, Employee e) {
-        guest = g;
-        checkedInBy = e;
-        //status = RoomStatus.OCCUPIED; //is this the right syntax?
-    }
-    
-    public void checkIn() {
+
+    // checks this room's guest out of it
+    public void checkOut() {
+        guest.clearRoom(this);
         guest = null;
         checkedInBy = null;
-        //status = RoomStatus.OPEN;
+        if (status != RoomStatus.MAINTENANCE) status = RoomStatus.OPEN;
+    }
+    
+    public boolean checkIn(Guest g, Employee e) {
+        if (status == RoomStatus.OPEN) {
+            guest = g;
+            checkedInBy = e;
+            status = RoomStatus.OCCUPIED;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
