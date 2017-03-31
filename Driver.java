@@ -1,5 +1,7 @@
 import Model.Hotel;
 import Model.RoomLayout;
+import View.HomePanel;
+import View.HotelFrame;
 
 /**
  * This class contains the main method, which launches the hotel management system
@@ -21,6 +23,14 @@ public class Driver {
         model.checkInGuest("Piptendo@ou.edu","addison.womack@ou.edu","100");
 
         model.checkOutGuest("Piptendo@ou.edu","100");
+
+        HotelFrame view = new HotelFrame(model);
+
+        HomePanel homePanel = new HomePanel(model);
+
+        view.createTab(homePanel);
+
+        view.setVisible(true);
 
     }
 }
