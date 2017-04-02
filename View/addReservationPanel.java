@@ -1,3 +1,7 @@
+package View;
+
+import Model.Hotel;
+
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
