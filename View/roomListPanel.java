@@ -1,7 +1,3 @@
-package View;
-
-import Model.Hotel;
-
 import javax.swing.JPanel;
 import javax.swing.JList;
 import javax.swing.JComboBox;
@@ -17,6 +13,8 @@ import java.awt.Font;
 
 public class roomListPanel extends JPanel {
 
+	//private Hotel h;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -29,15 +27,21 @@ public class roomListPanel extends JPanel {
 		JList list = new JList();
 		list.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"this is where", "a room would go", "IF I HAD ONE", "", "font also gets", "a little beefier", "each line represents a room in a string format", "this string has to be used by the list to find the room"};
+		/*list.setModel(new AbstractListModel() {
+			ArrayList<Room> roomlist = h.getRooms();
+			String[] values = new String[h.getSize()];
+			for(int i = 0; i < roomlist.size(); i++) {
+				Room r = roomlist.get(i);
+				values[i] = r.toString();
+			}
+			
 			public int getSize() {
 				return values.length;
 			}
 			public Object getElementAt(int index) {
 				return values[index];
 			}
-		});
+		});*/
 		scrollPane.setViewportView(list);
 		
 
