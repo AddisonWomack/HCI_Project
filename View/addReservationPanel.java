@@ -1,7 +1,3 @@
-package View;
-
-import Model.Hotel;
-
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -11,6 +7,8 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class addReservationPanel extends JPanel {
 	private JTextField day1;
@@ -30,7 +28,7 @@ public class addReservationPanel extends JPanel {
 	private JTextField textField_3;
 	private JLabel lblRequestedLayout;
 	private JComboBox comboBox;
-
+	//private Hotel h;
 	/**
 	 * Create the panel.
 	 */
@@ -122,12 +120,30 @@ public class addReservationPanel extends JPanel {
 		add(year2, gbc_year2);
 		year2.setColumns(4);
 		
-		lblGuestName = new JLabel("Guest Name (First/Last)");
+		lblGuestEmail = new JLabel("Guest Email");
+		GridBagConstraints gbc_lblGuestEmail = new GridBagConstraints();
+		gbc_lblGuestEmail.anchor = GridBagConstraints.EAST;
+		gbc_lblGuestEmail.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGuestEmail.gridx = 0;
+		gbc_lblGuestEmail.gridy = 4;
+		add(lblGuestEmail, gbc_lblGuestEmail);
+		
+		textField_2 = new JTextField();
+		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
+		gbc_textField_2.gridwidth = 3;
+		gbc_textField_2.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_2.gridx = 1;
+		gbc_textField_2.gridy = 4;
+		add(textField_2, gbc_textField_2);
+		textField_2.setColumns(10);
+		
+		lblGuestName = new JLabel("Guest Name (First/Last)*");
 		GridBagConstraints gbc_lblGuestName = new GridBagConstraints();
 		gbc_lblGuestName.anchor = GridBagConstraints.EAST;
 		gbc_lblGuestName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblGuestName.gridx = 0;
-		gbc_lblGuestName.gridy = 4;
+		gbc_lblGuestName.gridy = 5;
 		add(lblGuestName, gbc_lblGuestName);
 		
 		textField = new JTextField();
@@ -135,7 +151,7 @@ public class addReservationPanel extends JPanel {
 		gbc_textField.insets = new Insets(0, 0, 5, 5);
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 4;
+		gbc_textField.gridy = 5;
 		add(textField, gbc_textField);
 		textField.setColumns(10);
 		
@@ -145,27 +161,9 @@ public class addReservationPanel extends JPanel {
 		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_1.gridx = 2;
-		gbc_textField_1.gridy = 4;
+		gbc_textField_1.gridy = 5;
 		add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
-		
-		lblGuestEmail = new JLabel("Guest Email*");
-		GridBagConstraints gbc_lblGuestEmail = new GridBagConstraints();
-		gbc_lblGuestEmail.anchor = GridBagConstraints.EAST;
-		gbc_lblGuestEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_lblGuestEmail.gridx = 0;
-		gbc_lblGuestEmail.gridy = 5;
-		add(lblGuestEmail, gbc_lblGuestEmail);
-		
-		textField_2 = new JTextField();
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.gridwidth = 3;
-		gbc_textField_2.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 1;
-		gbc_textField_2.gridy = 5;
-		add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
 		
 		lblGuestPhoneNumber = new JLabel("Guest Phone Number*");
 		GridBagConstraints gbc_lblGuestPhoneNumber = new GridBagConstraints();
@@ -203,6 +201,32 @@ public class addReservationPanel extends JPanel {
 		add(comboBox, gbc_comboBox);
 		
 		JButton btnAddReservation = new JButton("Add Reservation");
+		btnAddReservation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				/// TODO: Needs reconciliation with actual hotel model - not sure how it knows the hotel, but once it does this should work
+				/*String email = textField_2.getText();
+				Guest g = h.getGuest(email);
+				if(g == NULL) {
+					g = new Guest(textField.getText(), textField_1.getText(), email, textField_3.getText());
+					h.addGuest(textField.getText(), textField_1.getText(), email, textField_3.getText());
+				}
+				try{
+					int sday = Integer.parseInt(day1.getText());
+					int smonth = Integer.parseInt(month1.getText());
+					int syear = Integer.parseInt(year1.getText());
+					int eday = Integer.parseInt(day2.getText());
+					int emonth = Integer.parseInt(month2.getText());
+					int eyear = Integer.parseInt(year2.getText());
+					if(sday > 31 || sday < 0 || smonth > 12 || smonth < 0 || eday > 31 || eday < 0 || emonth > 12 || emonth < 0)
+						throw new Exception();
+					h.addReservation(syear, smonth, sday, eyear, emonth, eday, *some layout here*, email, "sampleemployeeemail@idunno.com");
+				}
+				catch(Exception e) {
+					JOptionPane.showMessageDialog(this, "Enter a valid date.", "Date error",  JOptionPane.ERROR_MESSAGE);
+				}
+				*/
+			}
+		});
 		GridBagConstraints gbc_btnAddReservation = new GridBagConstraints();
 		gbc_btnAddReservation.gridwidth = 2;
 		gbc_btnAddReservation.insets = new Insets(0, 0, 0, 5);
