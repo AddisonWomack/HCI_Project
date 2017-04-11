@@ -79,8 +79,8 @@ public class Room {
     
     public String toString() {
         String s = "OPEN";
-        if(status == RoomStatus.CLOSED)
-            s = "CLOSED";
+        if(status == RoomStatus.MAINTENANCE)
+            s = "MAINTENANCE";
         else if(status == RoomStatus.OCCUPIED)
             s = "OCCUPIED";
         return roomNumber + "\t\t" + s + "\t\t" + "Capacity: " + roomLayout.getMaximumRoomOccupancy();

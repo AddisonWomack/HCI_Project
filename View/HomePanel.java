@@ -12,6 +12,7 @@ public class HomePanel extends JPanel{
 
     private Hotel model;
 
+
     public HomePanel(Hotel model) {
         this.model = model;
         setName("Home");

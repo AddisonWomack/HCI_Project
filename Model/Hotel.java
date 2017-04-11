@@ -19,6 +19,7 @@ public class Hotel {
     private int numberOfVacantRooms;
     // A list of the objects that are listening for updates
     private ArrayList<Listener> listeners;
+    private Employee currentEmployee;
 
     // default constructor
     public Hotel() {
@@ -31,6 +32,7 @@ public class Hotel {
         rooms = new HashMap<>();
         listeners = new ArrayList<>();
         numberOfVacantRooms = 0;
+        currentEmployee = null;
     }
 
     // initializer constructor
@@ -44,6 +46,7 @@ public class Hotel {
         rooms = new HashMap<>();
         numberOfVacantRooms = 0;
         listeners = new ArrayList<>();
+        currentEmployee = null;
     }
 
     ///////////////////////////////////
@@ -95,6 +98,10 @@ public class Hotel {
         return guests.get(eMail);
     }
 
+    public Employee getCurrentEmployee() {
+        return  currentEmployee;
+    }
+
     ////////////////////
     // Setter Methods
     ////////////////////
@@ -114,9 +121,22 @@ public class Hotel {
         notifyListeners();
     }
 
+    public void login (String eMail, String password) {
+        try {
+            if (employees.get(eMail).matchPassword(password)) {
+                currentEmployee = employees.get(eMail);
+                notifyListeners();
+            } else {
+                System.out.println("password incorrect");
+            }
+        } catch (Exception e) {
+            System.out.println("employee not found");
+        }
+    }
+
     // adds an employee to the hotel
-    public void addEmployee(String firstName, String lastName, String eMail, String phoneNumber) {
-        Employee employee = new Employee(firstName,lastName,eMail,phoneNumber);
+    public void addEmployee(String firstName, String lastName, String eMail, String phoneNumber, String password) {
+        Employee employee = new Employee(firstName,lastName,eMail,phoneNumber, password);
         employees.put(eMail,employee);
         notifyListeners();
     }
@@ -173,7 +193,7 @@ public class Hotel {
         }
     }
 
-    // checks a guesss out of the hotel
+    // checks a guest out of the hotel
     public void checkOutGuest(String guestEmail, String roomID) {
         Guest guest = guests.get(guestEmail);
         numberOfVacantRooms += guest.getRoomsCheckedIn().size();

@@ -1,3 +1,7 @@
+package View;
+
+import Model.Hotel;
+
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -11,6 +15,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class addReservationPanel extends JPanel {
+
+	private Hotel model;
+
 	private JTextField day1;
 	private JTextField month1;
 	private JTextField year1;
@@ -28,11 +35,15 @@ public class addReservationPanel extends JPanel {
 	private JTextField textField_3;
 	private JLabel lblRequestedLayout;
 	private JComboBox comboBox;
-	//private Hotel h;
 	/**
 	 * Create the panel.
 	 */
-	public addReservationPanel() {
+	public addReservationPanel(Hotel model) {
+
+		this.model = model;
+
+		setName("Add Reservation");
+
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
