@@ -76,4 +76,13 @@ public class Room {
             return false;
         }
     }
+    
+    public String toString() {
+        String s = "OPEN";
+        if(status == RoomStatus.CLOSED)
+            s = "CLOSED";
+        else if(status == RoomStatus.OCCUPIED)
+            s = "OCCUPIED";
+        return id + "\t\t" + s + "\t\t" + "Capacity: " + rl.getMaximumRoomCapacity();
+    }
 }
