@@ -29,6 +29,22 @@ public class Room {
         problemHistory = new ArrayList<RoomIssue>();
         status = RoomStatus.OPEN;
     }
+    
+    public void setID(String id) {
+    	roomNumber = id;
+    }
+    
+    public String getID() {
+    	return roomNumber;
+    }
+    
+    public void setFloor(int floor) {
+    	floorNumber = floor;
+    }
+    
+    public int getFloor() {
+    	return floorNumber;
+    }
 
     public void addAmenity(Amenity a) {
         amenityList.add(a);
@@ -80,7 +96,7 @@ public class Room {
     public String toString() {
         String s = "OPEN";
         if(status == RoomStatus.MAINTENANCE)
-            s = "CLOSED";
+            s = "MAINTENANCE";
         else if(status == RoomStatus.OCCUPIED)
             s = "OCCUPIED";
         return roomNumber + "\t\t" + s + "\t\t" + "Capacity: " + roomLayout.getMaximumRoomOccupancy();
