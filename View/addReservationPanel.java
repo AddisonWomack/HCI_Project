@@ -1,6 +1,7 @@
 package View;
 
 import Model.Hotel;
+import Model.Listener;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
