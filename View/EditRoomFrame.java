@@ -1,5 +1,6 @@
 import Model.Hotel;
 import Model.Room;
+import Model.RoomLayout;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -98,7 +99,7 @@ public class EditRoomFrame extends JFrame {
 		contentPane.add(layoutLabel, gbc_layoutLabel);
 		
 		///I'm not really sure what to put in here
-		JComboBox comboBox = new JComboBox();
+		JComboBox<RoomLayout> comboBox = new JComboBox<RoomLayout>(RoomLayout.values());
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.gridwidth = 2;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
@@ -112,8 +113,9 @@ public class EditRoomFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				r.setID(textField_4.getText());
 				r.setFloor(Integer.parseInt(textField_3.getText()));
-				//r.setLayout(???);
-				//Exit frame somehow
+				r.setLayout((RoomLayout)comboBox.getSelectedItem());
+				setVisible(false);
+				dispose();
 			}
 		});
 		GridBagConstraints gbc_editButton = new GridBagConstraints();
@@ -127,7 +129,8 @@ public class EditRoomFrame extends JFrame {
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				h.removeRoom(r);
-				//Exit frame somehow
+				setVisible(false);
+				dispose();
 			}
 		});
 		GridBagConstraints gbc_deleteButton = new GridBagConstraints();

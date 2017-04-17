@@ -1,6 +1,7 @@
 package View;
 
 import Model.Hotel;
+import Model.Room;
 
 import javax.swing.JPanel;
 import javax.swing.JList;
@@ -14,6 +15,7 @@ import java.awt.BorderLayout;
 import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
 import java.awt.Font;
+import java.util.ArrayList;
 
 public class roomListPanel extends JPanel {
 
@@ -33,24 +35,16 @@ public class roomListPanel extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
 		
-		JList list = new JList();
+		ArrayList<Room> roomlist = model.getRooms();
+		String[] values = new String[roomlist.size()];
+		for(int i = 0; i < roomlist.size(); i++) {
+			Room r = roomlist.get(i);
+			values[i] = r.toString();
+		}
+		JList<String> list = new JList<String>(values);
 		list.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		/*list.setModel(new AbstractListModel() {
-			ArrayList<Room> roomlist = h.getRooms();
-			String[] values = new String[h.getSize()];
-			for(int i = 0; i < roomlist.size(); i++) {
-				Room r = roomlist.get(i);
-				values[i] = r.toString();
-			}
-			
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});*/
+		
 		scrollPane.setViewportView(list);
 		
 

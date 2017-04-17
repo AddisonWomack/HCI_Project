@@ -1,13 +1,17 @@
 package View;
 
+import Model.Guest;
 import Model.Hotel;
 import Model.Listener;
+import Model.RoomLayout;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -35,7 +39,7 @@ public class addReservationPanel extends JPanel {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JLabel lblRequestedLayout;
-	private JComboBox comboBox;
+	private JComboBox<RoomLayout> comboBox;
 	/**
 	 * Create the panel.
 	 */
@@ -203,7 +207,7 @@ public class addReservationPanel extends JPanel {
 		gbc_lblRequestedLayout.gridy = 7;
 		add(lblRequestedLayout, gbc_lblRequestedLayout);
 		
-		comboBox = new JComboBox();
+		comboBox = new JComboBox<RoomLayout>(RoomLayout.values());
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.gridwidth = 3;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
@@ -215,12 +219,11 @@ public class addReservationPanel extends JPanel {
 		JButton btnAddReservation = new JButton("Add Reservation");
 		btnAddReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/// TODO: Needs reconciliation with actual hotel model - not sure how it knows the hotel, but once it does this should work
-				/*String email = textField_2.getText();
-				Guest g = h.getGuest(email);
-				if(g == NULL) {
+				String email = textField_2.getText();
+				Guest g = model.getGuest(email);
+				if(g == null) {
 					g = new Guest(textField.getText(), textField_1.getText(), email, textField_3.getText());
-					h.addGuest(textField.getText(), textField_1.getText(), email, textField_3.getText());
+					model.addGuest(textField.getText(), textField_1.getText(), email, textField_3.getText());
 				}
 				try{
 					int sday = Integer.parseInt(day1.getText());
@@ -231,12 +234,11 @@ public class addReservationPanel extends JPanel {
 					int eyear = Integer.parseInt(year2.getText());
 					if(sday > 31 || sday < 0 || smonth > 12 || smonth < 0 || eday > 31 || eday < 0 || emonth > 12 || emonth < 0)
 						throw new Exception();
-					h.addReservation(syear, smonth, sday, eyear, emonth, eday, *some layout here*, email, "sampleemployeeemail@idunno.com");
+					model.addReservation(syear, smonth, sday, eyear, emonth, eday, (RoomLayout)comboBox.getSelectedItem(), email, "sampleemployeeemail@idunno.com");
 				}
 				catch(Exception e) {
-					JOptionPane.showMessageDialog(this, "Enter a valid date.", "Date error",  JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(addReservationPanel.this, "Enter a valid date.", "Date error",  JOptionPane.ERROR_MESSAGE);
 				}
-				*/
 			}
 		});
 		GridBagConstraints gbc_btnAddReservation = new GridBagConstraints();
