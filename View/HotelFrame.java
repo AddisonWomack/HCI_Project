@@ -25,4 +25,12 @@ public class HotelFrame extends JFrame {
         pane.add(component);
     }
 
+    public void setTabVisibility() {
+        pane.setEnabledAt(0, true);
+        for (int i = 1; i < pane.getTabCount() - 1; i++) {
+            pane.setEnabledAt(i, (model.getCurrentEmployee() != null));
+        }
+        pane.setEnabledAt(pane.getTabCount() - 1, (model.getCurrentEmployee() != null) && model.getCurrentEmployee().isAdmin());
+    }
+
 }

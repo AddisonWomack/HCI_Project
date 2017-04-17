@@ -1,7 +1,6 @@
 import Model.Hotel;
 import Model.RoomLayout;
-import View.HomePanel;
-import View.HotelFrame;
+import View.*;
 
 /**
  * This class contains the main method, which launches the hotel management system
@@ -13,7 +12,7 @@ public class Driver {
         model.addGuest("Jamie", "Ferguson", "Piptendo@ou.edu", "0987654321");
 
         model.addEmployee("Addison", "Womack", "addison.womack@ou.edu",
-                "4054965830");
+                "4054965830", "password");
 
         model.addRoom("100", 1, RoomLayout.EXECUTIVESUITE);
 
@@ -28,7 +27,19 @@ public class Driver {
 
         HomePanel homePanel = new HomePanel(model);
 
+        addReservationPanel addReservationPanel = new addReservationPanel(model);
+
+        roomListPanel roomListPanel = new roomListPanel(model);
+
+        AdministratorPanel adminPanel = new AdministratorPanel(model);
+
         view.createTab(homePanel);
+
+        view.createTab(addReservationPanel);
+
+        view.createTab(roomListPanel);
+
+        view.createTab(adminPanel);
 
         view.setVisible(true);
 

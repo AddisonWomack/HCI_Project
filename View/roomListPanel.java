@@ -1,3 +1,7 @@
+package View;
+
+import Model.Hotel;
+
 import javax.swing.JPanel;
 import javax.swing.JList;
 import javax.swing.JComboBox;
@@ -13,12 +17,17 @@ import java.awt.Font;
 
 public class roomListPanel extends JPanel {
 
-	//private Hotel h;
-	
+	private Hotel model;
+
 	/**
 	 * Create the panel.
 	 */
-	public roomListPanel() {
+	public roomListPanel(Hotel model) {
+
+		this.model = model;
+
+		setName("Rooms");
+
 		setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
