@@ -10,6 +10,9 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
@@ -85,13 +88,24 @@ public class LoginPanel extends JPanel {
 		passField.setColumns(10);
 		
 		//submit button
-		JButton btnNewButton = new JButton("Submit");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
-		gbc_btnNewButton.gridx = 3;
-		gbc_btnNewButton.gridy = 5;
-		add(btnNewButton, gbc_btnNewButton);
+		JButton btnSubmit = new JButton("Submit");
+		//listener implemented to login
+		btnSubmit.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				if (ae.getSource() == btnSubmit) {
+					model.login(getUser(), getPass());
+				}
+			}
+		});
+		
+		GridBagConstraints gbc_btnSubmit = new GridBagConstraints();
+		gbc_btnSubmit.insets = new Insets(0, 0, 5, 5);
+		gbc_btnSubmit.fill = GridBagConstraints.BOTH;
+		gbc_btnSubmit.gridx = 3;
+		gbc_btnSubmit.gridy = 5;
+		add(btnSubmit, gbc_btnSubmit);
 
 	}
 	
