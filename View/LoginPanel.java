@@ -1,4 +1,5 @@
 package View;
+import Model.Hotel;
 
 
 import javax.swing.JPanel;
@@ -24,7 +25,7 @@ public class LoginPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public LoginPanel() {
+	public LoginPanel(Hotel model) {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 0, 39, 94, 30, 0};
 		gridBagLayout.rowHeights = new int[]{61, 29, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -32,6 +33,7 @@ public class LoginPanel extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
+		//login label
 		JLabel lblNewLabel = new JLabel("Login");
 		lblNewLabel.setFont(new Font("MS PGothic", Font.BOLD | Font.ITALIC, 31));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -42,6 +44,7 @@ public class LoginPanel extends JPanel {
 		gbc_lblNewLabel.gridy = 1;
 		add(lblNewLabel, gbc_lblNewLabel);
 		
+		//email label
 		JLabel lblUsername = new JLabel("E-mail:");
 		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
 		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
@@ -50,6 +53,7 @@ public class LoginPanel extends JPanel {
 		gbc_lblUsername.gridy = 3;
 		add(lblUsername, gbc_lblUsername);
 		
+		//username text field
 		userField = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.gridwidth = 2;
@@ -60,6 +64,7 @@ public class LoginPanel extends JPanel {
 		add(userField, gbc_textField_1);
 		userField.setColumns(10);
 		
+		//password label
 		JLabel lblPassword = new JLabel("Password:");
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
@@ -68,6 +73,7 @@ public class LoginPanel extends JPanel {
 		gbc_lblPassword.gridy = 4;
 		add(lblPassword, gbc_lblPassword);
 		
+		//password text field
 		passField = new JPasswordField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 5);
@@ -78,6 +84,7 @@ public class LoginPanel extends JPanel {
 		add(passField, gbc_textField);
 		passField.setColumns(10);
 		
+		//submit button
 		JButton btnNewButton = new JButton("Submit");
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
@@ -88,10 +95,13 @@ public class LoginPanel extends JPanel {
 
 	}
 	
+	//returns string of what's in the username field
 	public String getUser() {
 		return userField.getText();
 	}
 	
+	//returns string of what's in the password field
+	//note: apparently getPassword() returns char[], so here's some dumb work around
 	public String getPass() {
 		StringBuilder temp = new StringBuilder();
 		
