@@ -1,3 +1,4 @@
+package View;
 
 
 import javax.swing.JPanel;
@@ -85,6 +86,19 @@ public class LoginPanel extends JPanel {
 		gbc_btnNewButton.gridy = 5;
 		add(btnNewButton, gbc_btnNewButton);
 
+	}
+	
+	public String getUser() {
+		return userField.getText();
+	}
+	
+	public String getPass() {
+		StringBuilder temp = new StringBuilder();
+		
+		for (int i = 0; i < passField.getPassword().length; i++) {
+			temp.append(Character.toString(passField.getPassword()[i]));
+		}
+		return temp.toString();
 	}
 
 }
