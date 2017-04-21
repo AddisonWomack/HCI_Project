@@ -101,6 +101,15 @@ public class Hotel {
     public Employee getCurrentEmployee() {
         return  currentEmployee;
     }
+    
+    // Gets a room based on a string - needed for roomList
+    public Room getRoom(String identifier) {
+    	String key = "";
+    	int index = 0;
+    	while(identifier.charAt(index) != ' ')
+    		key = key + identifier.charAt(index);
+    	return rooms.get(key);
+    }
 
     ////////////////////
     // Setter Methods
@@ -148,9 +157,18 @@ public class Hotel {
         numberOfVacantRooms++;
         notifyListeners();
     }
+    
+    // adds THIS room to the hotel
+    public void addRoom(Room r) {
+		this.rooms.put(r.getID(), r);
+		numberOfVacantRooms++;
+		notifyListeners();
+	}
      
     // removes a room from the hotel
     public void removeRoom(Room r) {
+    	if(r.isOpen())
+    		numberOfVacantRooms--;
     	rooms.remove(r.getID());
     }
 

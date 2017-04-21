@@ -70,6 +70,10 @@ public class Room {
         return roomLayout;
     }
     
+    public boolean isOpen() {
+    	return status == RoomStatus.OPEN;
+    }
+    
     public void openRoom() {
         status = RoomStatus.OPEN;
     }

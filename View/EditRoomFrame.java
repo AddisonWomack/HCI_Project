@@ -1,3 +1,5 @@
+package View;
+
 import Model.Hotel;
 import Model.Room;
 import Model.RoomLayout;
@@ -98,7 +100,6 @@ public class EditRoomFrame extends JFrame {
 		gbc_layoutLabel.gridy = 4;
 		contentPane.add(layoutLabel, gbc_layoutLabel);
 		
-		///I'm not really sure what to put in here
 		JComboBox<RoomLayout> comboBox = new JComboBox<RoomLayout>(RoomLayout.values());
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.gridwidth = 2;
@@ -138,6 +139,8 @@ public class EditRoomFrame extends JFrame {
 		gbc_deleteButton.gridx = 2;
 		gbc_deleteButton.gridy = 5;
 		contentPane.add(deleteButton, gbc_deleteButton);
+		
+		this.setVisible(true);
 	}
 
 }
