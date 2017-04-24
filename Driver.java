@@ -25,22 +25,6 @@ public class Driver {
 
         HotelFrame view = new HotelFrame(model);
 
-        HomePanel homePanel = new HomePanel(model);
-
-        addReservationPanel addReservationPanel = new addReservationPanel(model);
-
-        roomListPanel roomListPanel = new roomListPanel(model);
-
-        AdministratorPanel adminPanel = new AdministratorPanel(model);
-
-        view.createTab(homePanel);
-
-        view.createTab(addReservationPanel);
-
-        view.createTab(roomListPanel);
-
-        view.createTab(adminPanel);
-
         view.setVisible(true);
 
     }

@@ -46,7 +46,6 @@ public class roomListPanel extends JPanel {
 		setLayout(gridBagLayout);
 				
 		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane, BorderLayout.CENTER);
 		
 		ArrayList<Room> roomlist = model.getRooms();
 		String[] values = new String[roomlist.size()];
