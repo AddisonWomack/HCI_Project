@@ -82,6 +82,7 @@ public class addReservationPanel extends JPanel {
 		gbc_day1.gridy = 2;
 		add(day1, gbc_day1);
 		day1.setColumns(2);
+		day1.setToolTipText("Enter a day.");
 		
 		month1 = new JTextField();
 		GridBagConstraints gbc_month1 = new GridBagConstraints();
@@ -91,6 +92,7 @@ public class addReservationPanel extends JPanel {
 		gbc_month1.gridy = 2;
 		add(month1, gbc_month1);
 		month1.setColumns(2);
+		month1.setToolTipText("Enter a month.");
 		
 		year1 = new JTextField();
 		GridBagConstraints gbc_year1 = new GridBagConstraints();
@@ -100,6 +102,7 @@ public class addReservationPanel extends JPanel {
 		gbc_year1.gridy = 2;
 		add(year1, gbc_year1);
 		year1.setColumns(4);
+		year1.setToolTipText("Enter a year.");
 		
 		JLabel lblEndDateddmmyyyy = new JLabel("End Date (DD/MM/YYYY)");
 		GridBagConstraints gbc_lblEndDateddmmyyyy = new GridBagConstraints();
@@ -117,6 +120,7 @@ public class addReservationPanel extends JPanel {
 		gbc_day2.gridy = 3;
 		add(day2, gbc_day2);
 		day2.setColumns(2);
+		day2.setToolTipText("Enter a day.");
 		
 		month2 = new JTextField();
 		GridBagConstraints gbc_month2 = new GridBagConstraints();
@@ -126,6 +130,7 @@ public class addReservationPanel extends JPanel {
 		gbc_month2.gridy = 3;
 		add(month2, gbc_month2);
 		month2.setColumns(2);
+		month2.setToolTipText("Enter a month.");
 		
 		year2 = new JTextField();
 		GridBagConstraints gbc_year2 = new GridBagConstraints();
@@ -135,6 +140,7 @@ public class addReservationPanel extends JPanel {
 		gbc_year2.gridy = 3;
 		add(year2, gbc_year2);
 		year2.setColumns(4);
+		year2.setToolTipText("Enter a year.");
 		
 		lblGuestEmail = new JLabel("Guest Email");
 		GridBagConstraints gbc_lblGuestEmail = new GridBagConstraints();
@@ -153,6 +159,7 @@ public class addReservationPanel extends JPanel {
 		gbc_textField_2.gridy = 4;
 		add(textField_2, gbc_textField_2);
 		textField_2.setColumns(10);
+		textField_2.setToolTipText("Enter a verifiable email address.");
 		
 		lblGuestName = new JLabel("Guest Name (First/Last)*");
 		GridBagConstraints gbc_lblGuestName = new GridBagConstraints();
@@ -170,6 +177,7 @@ public class addReservationPanel extends JPanel {
 		gbc_textField.gridy = 5;
 		add(textField, gbc_textField);
 		textField.setColumns(10);
+		textField.setToolTipText("Enter the guest's first name.");
 		
 		textField_1 = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
@@ -180,6 +188,7 @@ public class addReservationPanel extends JPanel {
 		gbc_textField_1.gridy = 5;
 		add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
+		textField_1.setToolTipText("Enter the guest's last name.");
 		
 		lblGuestPhoneNumber = new JLabel("Guest Phone Number*");
 		GridBagConstraints gbc_lblGuestPhoneNumber = new GridBagConstraints();
@@ -198,6 +207,7 @@ public class addReservationPanel extends JPanel {
 		gbc_textField_3.gridy = 6;
 		add(textField_3, gbc_textField_3);
 		textField_3.setColumns(10);
+		textField_3.setToolTipText("Enter the guest's phone number.");
 		
 		lblRequestedLayout = new JLabel("Requested Layout");
 		GridBagConstraints gbc_lblRequestedLayout = new GridBagConstraints();
@@ -215,6 +225,7 @@ public class addReservationPanel extends JPanel {
 		gbc_comboBox.gridx = 1;
 		gbc_comboBox.gridy = 7;
 		add(comboBox, gbc_comboBox);
+		comboBox.setToolTipText("Select the guest's preferred room layout.");
 		
 		JButton btnAddReservation = new JButton("Add Reservation");
 		btnAddReservation.addActionListener(new ActionListener() {
@@ -247,6 +258,7 @@ public class addReservationPanel extends JPanel {
 		gbc_btnAddReservation.gridx = 0;
 		gbc_btnAddReservation.gridy = 8;
 		add(btnAddReservation, gbc_btnAddReservation);
+		btnAddReservation.setToolTipText("Click this button to add the completed reservation to\nthe reservation list.");
 		
 		lblifNewGuest = new JLabel("*If new guest");
 		GridBagConstraints gbc_lblifNewGuest = new GridBagConstraints();

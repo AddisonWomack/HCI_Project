@@ -65,6 +65,7 @@ public class roomListPanel extends JPanel {
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 0;
 		add(scrollPane, gbc_scrollPane);
+		scrollPane.setToolTipText("Please select a room from this list to view and edit its details.");
 		
 		JButton btnCreate = new JButton("Create");
 		GridBagConstraints gbc_btnCreate = new GridBagConstraints();
@@ -80,6 +81,7 @@ public class roomListPanel extends JPanel {
 				EditRoomFrame  erf = new EditRoomFrame(model, r);
 			}
 		});
+		btnCreate.setToolTipText("Create a room that previously didn't exist.");
 		
 		JButton btnED = new JButton("Edit/Delete");
 		btnED.addActionListener(new ActionListener() {
@@ -94,6 +96,7 @@ public class roomListPanel extends JPanel {
 		gbc_btnED.gridx = 1;
 		gbc_btnED.gridy = 1;
 		add(btnED, gbc_btnED);
+		btnED.setToolTipText("Edit or Delete and existing room.");
 		
 		JButton btnResolve = new JButton("Resolve Issue");
 		btnResolve.addActionListener(new ActionListener() {
@@ -107,6 +110,7 @@ public class roomListPanel extends JPanel {
 		gbc_btnResolve.gridx = 2;
 		gbc_btnResolve.gridy = 1;
 		add(btnResolve, gbc_btnResolve);
+		btnResolve.setToolTipText("If the issue with the room is resolved, click this button.");
 		
 		scrollPane.setViewportView(list);
 		
