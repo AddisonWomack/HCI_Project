@@ -61,6 +61,13 @@ public class Room {
             status = RoomStatus.MAINTENANCE;
     }
     
+    public void resolveIssue() {
+    	for(RoomIssue ri : problemHistory) {
+    		if (ri.isOngoing)
+    			ri.isOngoing = false;
+    	}
+    }
+    
     public void setLayout(RoomLayout rl) {
         roomLayout = rl;
     }

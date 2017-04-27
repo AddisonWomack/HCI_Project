@@ -102,6 +102,7 @@ public class roomListPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Room r = model.getRoom(list.getSelectedValue());
 				r.openRoom();
+				r.resolveIssue();
 			}
 		});
 		GridBagConstraints gbc_btnResolve = new GridBagConstraints();

@@ -11,7 +11,7 @@ public class RoomIssue {
     private Date reportDate;
     private Date resolvedDate;
     private String description;
-    private boolean isOngoing;
+    public boolean isOngoing;
 
     public RoomIssue(Date d, String desc) {
         reportDate = d;
