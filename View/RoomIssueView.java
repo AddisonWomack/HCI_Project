@@ -114,15 +114,17 @@ public class RoomIssueView extends JFrame {
 				issueStart.setDate(model.getDay());
 				issueStart.setMonth(model.getMonth());
 				issueStart.setYear(model.getYear());
+				RoomIssue r = new RoomIssue(issueStart, textField_2.getText());
 				try{
 					Date issueEnd = new Date();
 					issueEnd.setDate(model2.getDay());
 					issueEnd.setMonth(model2.getMonth());
 					issueEnd.setYear(model2.getYear());
-					RoomIssue r = new RoomIssue(issueStart, textField_2.getText());
+					r.resolve(issueEnd);
 				} catch (Error e) {
 					
 				}
+				
 			}
 		});
 		contentPane.add(btnAddIssue);
