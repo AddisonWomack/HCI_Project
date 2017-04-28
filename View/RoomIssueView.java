@@ -1,7 +1,5 @@
 package View;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -11,17 +9,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.jdatepicker.JDatePicker;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import Model.Hotel;
+import Model.Room;
 import Model.RoomIssue;
-import Model.RoomLayout;
 
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -31,25 +28,9 @@ public class RoomIssueView extends JFrame {
 	private JTextField textField_2;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RoomIssueView frame = new RoomIssueView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public RoomIssueView() {
+	public RoomIssueView(String roomNumber, Hotel h) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -124,7 +105,7 @@ public class RoomIssueView extends JFrame {
 				} catch (Error e) {
 					
 				}
-				
+				h.getRoom(roomNumber).addProblem(r, false);
 			}
 		});
 		contentPane.add(btnAddIssue);
