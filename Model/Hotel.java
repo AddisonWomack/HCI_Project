@@ -143,6 +143,11 @@ public class Hotel {
         }
     }
 
+    public void logout () {
+        this.currentEmployee = null;
+        notifyListeners();
+    }
+
     // adds an employee to the hotel
     public void addEmployee(String firstName, String lastName, String eMail, String phoneNumber, String password) {
         Employee employee = new Employee(firstName,lastName,eMail,phoneNumber, password);

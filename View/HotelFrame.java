@@ -5,9 +5,6 @@ import Model.Listener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * Created by Addison on 3/30/2017.
@@ -21,6 +18,9 @@ public class HotelFrame extends JFrame implements Listener {
         this.model = model;
         this.model.addListener(this);
         setTitle(model.getName());
+        int height = 600;
+        setMinimumSize(new Dimension(1618 * height / 1000,height));
+        setSize(1618 * height / 1000,height);
         setLayout(new BorderLayout());
         pane = new JTabbedPane();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +28,6 @@ public class HotelFrame extends JFrame implements Listener {
         add(new CurrentEmployeeInfoPanel(model), BorderLayout.NORTH);
         add(new JLabel("\u00a9" + " 2017 Radhakrishnan's Raptors Inc."), BorderLayout.SOUTH); // add copyright logo
         init();
-        setSize(600,400);
     }
 
     private void init() {
@@ -40,25 +39,50 @@ public class HotelFrame extends JFrame implements Listener {
 
         AdministratorPanel adminPanel = new AdministratorPanel(model);
 
-        createTab(loginPanel);
+        CalendarPanel calendarPanel = new CalendarPanel();
 
-        createTab(addReservationPanel);
+        pane.add(loginPanel);
+        pane.setToolTipTextAt(0,"menu for logging into your account");
 
-        createTab(roomListPanel);
+        pane.add(addReservationPanel);
+        pane.setToolTipTextAt(1,"menu for adding, removing, and editing reservations");
 
-        createTab(adminPanel);
-    }
+        pane.add(roomListPanel);
+        pane.setToolTipTextAt(2, "menu for adding, removing, editing, and reporting and resolving" +
+                " problems that rooms have.");
 
-    private void createTab(Component component) {
-        pane.add(component);
+        pane.add(calendarPanel);
+        pane.setToolTipTextAt(3,"menu for viewing a calendar that links to all of the rooms");
+
+        pane.add(adminPanel);
+        pane.setToolTipTextAt(4,"menu for editing hotel information, creating, editing, and deleting" +
+                "employees, and shutting down the hotel");
+
+        setTabVisibility();
     }
 
     private void setTabVisibility() {
-        pane.setEnabledAt(0, true);
-        for (int i = 1; i < pane.getTabCount() - 1; i++) {
-            pane.setEnabledAt(i, (model.getCurrentEmployee() != null));
+
+        if (model.getCurrentEmployee() == null) {
+            pane.setEnabledAt(0, true);
+            pane.getComponentAt(0).setVisible(true);
+            pane.setSelectedIndex(0); // selects login screen
+            for (int i = 1; i < pane.getTabCount(); i++) {
+                pane.setEnabledAt(i, false);
+                pane.getComponentAt(i).setVisible(false);
+            }
+
+        } else {
+            pane.getComponentAt(0).setVisible(false);
+            pane.setEnabledAt(0,false);
+            for (int i = 1; i < pane.getTabCount() - 1; i++) {
+                pane.getComponentAt(i).setVisible(true);
+                pane.setEnabledAt(i, true);
+            }
+            pane.setEnabledAt(pane.getTabCount() - 1, model.getCurrentEmployee().isAdmin());
+            pane.getComponentAt(pane.getTabCount() - 1).setVisible(model.getCurrentEmployee().isAdmin());
+            pane.setSelectedIndex(1); // selects logout screen
         }
-        pane.setEnabledAt(pane.getTabCount() - 1, (model.getCurrentEmployee() != null) && model.getCurrentEmployee().isAdmin());
     }
 
     public void updated() {

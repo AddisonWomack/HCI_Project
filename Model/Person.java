@@ -44,6 +44,8 @@ public abstract class Person {
         this.eMailAddress = eMailAddress;
     }
 
+    public void setFirstName(String firstName) {this.firstName = firstName; }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }

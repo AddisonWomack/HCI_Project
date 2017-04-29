@@ -1,22 +1,20 @@
 package View;
 import Model.Hotel;
+import Model.Listener;
 
 
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import java.awt.GridBagLayout;
+import java.awt.*;
 import javax.swing.JTextField;
 
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
-public class LoginPanel extends JPanel {
+public class LoginPanel extends JPanel implements Listener {
 
 	/**
 	 * shut up compiler
@@ -24,11 +22,15 @@ public class LoginPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JPasswordField passField;
 	private JTextField userField;
+    private Hotel model;
 
 	/**
 	 * Create the panel.
 	 */
 	public LoginPanel(Hotel model) {
+		setName("Login");
+		this.model = model;
+		this.model.addListener(this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 0, 39, 94, 30, 0};
 		gridBagLayout.rowHeights = new int[]{61, 29, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -123,6 +125,15 @@ public class LoginPanel extends JPanel {
 			temp.append(Character.toString(passField.getPassword()[i]));
 		}
 		return temp.toString();
+	}
+
+	public void updated() {
+		try {
+			this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+			passField.setText(""); // resets field after logout
+		} finally {
+			this.setCursor(Cursor.getDefaultCursor());
+		}
 	}
 
 }
