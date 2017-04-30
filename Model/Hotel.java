@@ -1,5 +1,6 @@
 package Model;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -146,6 +147,18 @@ public class Hotel {
     public void logout () {
         this.currentEmployee = null;
         notifyListeners();
+    }
+
+    public boolean shutDown(String password) {
+        if (currentEmployee.matchPassword(password)) {
+            rooms.clear();
+            reservations.clear();
+            guests.clear();
+            notifyListeners();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // adds an employee to the hotel

@@ -23,6 +23,8 @@ public class Driver {
 
         model.checkOutGuest("Piptendo@ou.edu","100");
 
+        model.getEmployee("addison.womack@ou.edu").setAdmin(true);
+
         HotelFrame view = new HotelFrame(model);
 
         view.setVisible(true);

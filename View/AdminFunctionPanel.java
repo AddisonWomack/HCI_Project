@@ -5,6 +5,8 @@ import Model.Listener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Addison on 4/18/2017.
@@ -90,6 +92,22 @@ public class AdminFunctionPanel extends JPanel implements Listener{
         gbc.gridx = 1;
         gbc.gridy = 5;
         add(emergencyButton, gbc);
+
+        emergencyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String pword = JOptionPane.showInputDialog(null, "Enter Password to Continue Hotel Shutdown.");
+
+                System.out.println(pword);
+                if (pword != null) {
+                    if (model.shutDown(pword)) {
+                        JOptionPane.showMessageDialog(null,"Hotel Shutdown Successful","Shutdown Successful", JOptionPane.PLAIN_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Incorrect Password Shutdown Failed", "Shutdown Failed",JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
     }
     public void updated() {
 
