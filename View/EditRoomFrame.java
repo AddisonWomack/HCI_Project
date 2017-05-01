@@ -23,7 +23,7 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-public class EditRoomFrame extends JFrame implements Listener{
+public class EditRoomFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField_3;
@@ -33,7 +33,6 @@ public class EditRoomFrame extends JFrame implements Listener{
 	 * Create the frame.
 	 */
 	public EditRoomFrame(Hotel h, Room r) {
-		h.addListener(this);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -115,9 +114,11 @@ public class EditRoomFrame extends JFrame implements Listener{
 		JButton editButton = new JButton("Edit");
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				h.removeRoom(r);
 				r.setID(textField_4.getText());
 				r.setFloor(Integer.parseInt(textField_3.getText()));
 				r.setLayout((RoomLayout)comboBox.getSelectedItem());
+				h.addRoom(r);
 				setVisible(false);
 				dispose();
 			}
@@ -145,11 +146,4 @@ public class EditRoomFrame extends JFrame implements Listener{
 		
 		this.setVisible(true);
 	}
-
-	@Override
-	public void updated() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

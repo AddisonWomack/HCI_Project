@@ -113,8 +113,10 @@ public class Hotel {
     public Room getRoom(String identifier) {
     	String key = "";
     	int index = 0;
-    	while(identifier.charAt(index) != ' ')
+    	while(identifier.charAt(index) != ' ') {
     		key = key + identifier.charAt(index);
+    		index++;
+    	}
     	return rooms.get(key);
     }
 

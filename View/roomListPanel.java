@@ -85,7 +85,7 @@ public class roomListPanel extends JPanel implements Listener{
 			public void actionPerformed(ActionEvent e) {
 				Room r = new Room("New Room", -1, RoomLayout.STANDARDSUITE);
 				model.addRoom(r);
-				EditRoomFrame  erf = new EditRoomFrame(model, r);
+				EditRoomFrame erf = new EditRoomFrame(model, r);
 			}
 		});
 		btnCreate.setToolTipText("Create a room that previously didn't exist.");

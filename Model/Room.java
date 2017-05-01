@@ -110,6 +110,6 @@ public class Room {
             s = "MAINTENANCE";
         else if(status == RoomStatus.OCCUPIED)
             s = "OCCUPIED";
-        return roomNumber + "\t\t" + s + "\t\t" + "Capacity: " + roomLayout.getMaximumRoomOccupancy();
+        return roomNumber + "    " + s + "    " + "Capacity: " + roomLayout.getMaximumRoomOccupancy();
     }
 }
