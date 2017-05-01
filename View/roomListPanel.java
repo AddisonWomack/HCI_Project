@@ -32,9 +32,10 @@ public class roomListPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public roomListPanel(Hotel model) {
+	public roomListPanel(Hotel model) implements Listener {
 
 		this.model = model;
+		this.model.addListener(this);
 
 		setName("Rooms");
 		
@@ -48,12 +49,15 @@ public class roomListPanel extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		
 		ArrayList<Room> roomlist = model.getRooms();
-		String[] values = new String[roomlist.size()];
+		//String[] values = new String[roomlist.size()];
+        listModel = new DefaultListModel();
+
 		for(int i = 0; i < roomlist.size(); i++) {
 			Room r = roomlist.get(i);
-			values[i] = r.toString();
+			//values[i] = r.toString();
+            listModel.addElement(e.toString());
 		}
-		JList<String> list = new JList<String>(values);
+		JList<String> list = new JList<String>(listModel);
 		list.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(list);
@@ -103,6 +107,7 @@ public class roomListPanel extends JPanel {
 				Room r = model.getRoom(list.getSelectedValue());
 				r.openRoom();
 				r.resolveIssue();
+				h.notifyListeners();
 			}
 		});
 		GridBagConstraints gbc_btnResolve = new GridBagConstraints();
@@ -113,8 +118,14 @@ public class roomListPanel extends JPanel {
 		btnResolve.setToolTipText("If the issue with the room is resolved, click this button.");
 		
 		scrollPane.setViewportView(list);
-		
-
 	}
-
+	
+	public void updated() {
+		listModel.removeAllElements();
+        ArrayList<Room> roomlist = model.getRooms();
+    	for(int i = 0; i < roomlist.size(); i++) {
+    		Room r = roomlist.get(i);
+            listModel.addElement(e.toString()); 
+    	}
+	}
 }

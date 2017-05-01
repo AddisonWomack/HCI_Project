@@ -31,7 +31,9 @@ public class EditRoomFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditRoomFrame(Hotel h, Room r) {
+	public EditRoomFrame(Hotel h, Room r) implements Listener {
+		h.addListener(this);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -115,6 +117,7 @@ public class EditRoomFrame extends JFrame {
 				r.setID(textField_4.getText());
 				r.setFloor(Integer.parseInt(textField_3.getText()));
 				r.setLayout((RoomLayout)comboBox.getSelectedItem());
+				h.notifyListeners();
 				setVisible(false);
 				dispose();
 			}
@@ -130,6 +133,7 @@ public class EditRoomFrame extends JFrame {
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				h.removeRoom(r);
+				h.notifyListeners();
 				setVisible(false);
 				dispose();
 			}
