@@ -54,4 +54,8 @@ public abstract class Person {
         this.phoneNumber = phoneNumber;
     }
 
+    public String toString() {
+        return eMailAddress + " " + getFullName();
+    }
+
 }

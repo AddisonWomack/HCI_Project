@@ -75,6 +75,12 @@ public class Hotel {
         return roomList;
     }
 
+    public ArrayList<Employee> getEmployeesList() {
+        ArrayList<Employee> employeeList = new ArrayList<>();
+        employees.values().forEach(e -> employeeList.add(e));
+        return employeeList;
+    }
+
     public HashMap<GregorianCalendar, ArrayList<Reservation>> getReservations() {
         return reservations;
     }
@@ -150,7 +156,7 @@ public class Hotel {
     }
 
     public boolean shutDown(String password) {
-        if (currentEmployee.matchPassword(password)) {
+        if (password.equals("I understand that I am shutting down the hotel")) {
             rooms.clear();
             reservations.clear();
             guests.clear();
@@ -182,6 +188,32 @@ public class Hotel {
 		numberOfVacantRooms++;
 		notifyListeners();
 	}
+
+	public void updateEmployee(String originalEmail, String first, String last, String email, String phoneNumber, boolean isAdmin) {
+        try {
+            Employee old = employees.get(originalEmail);
+            Employee temp = new Employee(first,last,email,phoneNumber, old.getPassword());
+            temp.setAdmin(isAdmin);
+            employees.remove(originalEmail);
+            employees.put(email, temp);
+            notifyListeners();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "Unable to edit Employee " + first + " " + last,
+                    "Employee Edit Failure", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+	public void fireEmployee(String eMail) {
+        try {
+            employees.remove(eMail);
+            notifyListeners();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "Unable to Delete Employee " + eMail,
+                    "Employee Deletion Failure", JOptionPane.ERROR_MESSAGE);
+        }
+    }
      
     // removes a room from the hotel
     public void removeRoom(Room r) {

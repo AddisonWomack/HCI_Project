@@ -37,7 +37,7 @@ public class HotelFrame extends JFrame implements Listener {
 
         roomListPanel roomListPanel = new roomListPanel(model);
 
-        AdministratorPanel adminPanel = new AdministratorPanel(model);
+        AdminPanel adminPanel = new AdminPanel(model);
 
         CalendarPanel calendarPanel = new CalendarPanel();
 
@@ -65,23 +65,18 @@ public class HotelFrame extends JFrame implements Listener {
 
         if (model.getCurrentEmployee() == null) {
             pane.setEnabledAt(0, true);
-            pane.getComponentAt(0).setVisible(true);
             pane.setSelectedIndex(0); // selects login screen
             for (int i = 1; i < pane.getTabCount(); i++) {
                 pane.setEnabledAt(i, false);
-                pane.getComponentAt(i).setVisible(false);
             }
 
         } else {
-            pane.getComponentAt(0).setVisible(false);
             pane.setEnabledAt(0,false);
             for (int i = 1; i < pane.getTabCount() - 1; i++) {
-                pane.getComponentAt(i).setVisible(true);
                 pane.setEnabledAt(i, true);
             }
             pane.setEnabledAt(pane.getTabCount() - 1, model.getCurrentEmployee().isAdmin());
-            pane.getComponentAt(pane.getTabCount() - 1).setVisible(model.getCurrentEmployee().isAdmin());
-            pane.setSelectedIndex(1); // selects logout screen
+            if (pane.getSelectedIndex() == 0) pane.setSelectedIndex(1); // selects logout screen
         }
     }
 

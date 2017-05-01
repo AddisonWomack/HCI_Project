@@ -29,4 +29,7 @@ public class Employee extends Person {
         return isAdmin;
     }
 
+    public String getPassword() {
+        return password;
+    }
 }

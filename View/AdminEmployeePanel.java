@@ -1,16 +1,23 @@
 package View;
 
+import Model.Hotel;
+import Model.Listener;
+
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.JList;
 import javax.swing.JButton;
 
-public class AdminEmployeePanel extends JPanel {
+public class AdminEmployeePanel extends JPanel implements Listener {
 
+	private Hotel model;
 	/**
 	 * Create the panel.
 	 */
-	public AdminEmployeePanel() {
+	public AdminEmployeePanel(Hotel model) {
+		this.model = model;
+		this.model.addListener(this);
+
 		SpringLayout springLayout = new SpringLayout();
 		setLayout(springLayout);
 		
@@ -41,6 +48,10 @@ public class AdminEmployeePanel extends JPanel {
 		springLayout.putConstraint(SpringLayout.SOUTH, btnDelete, 0, SpringLayout.SOUTH, btnAdd);
 		springLayout.putConstraint(SpringLayout.EAST, btnDelete, -10, SpringLayout.EAST, this);
 		add(btnDelete);
+
+	}
+
+	public void updated() {
 
 	}
 }
