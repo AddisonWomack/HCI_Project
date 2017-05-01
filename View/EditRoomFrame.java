@@ -1,6 +1,7 @@
 package View;
 
 import Model.Hotel;
+import Model.Listener;
 import Model.Room;
 import Model.RoomLayout;
 
@@ -22,7 +23,7 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-public class EditRoomFrame extends JFrame {
+public class EditRoomFrame extends JFrame implements Listener{
 
 	private JPanel contentPane;
 	private JTextField textField_3;
@@ -31,7 +32,7 @@ public class EditRoomFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditRoomFrame(Hotel h, Room r) implements Listener {
+	public EditRoomFrame(Hotel h, Room r) {
 		h.addListener(this);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,7 +118,6 @@ public class EditRoomFrame extends JFrame {
 				r.setID(textField_4.getText());
 				r.setFloor(Integer.parseInt(textField_3.getText()));
 				r.setLayout((RoomLayout)comboBox.getSelectedItem());
-				h.notifyListeners();
 				setVisible(false);
 				dispose();
 			}
@@ -133,7 +133,6 @@ public class EditRoomFrame extends JFrame {
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				h.removeRoom(r);
-				h.notifyListeners();
 				setVisible(false);
 				dispose();
 			}
@@ -145,6 +144,12 @@ public class EditRoomFrame extends JFrame {
 		contentPane.add(deleteButton, gbc_deleteButton);
 		
 		this.setVisible(true);
+	}
+
+	@Override
+	public void updated() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
