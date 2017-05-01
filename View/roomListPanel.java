@@ -1,6 +1,7 @@
 package View;
 
 import Model.Hotel;
+import Model.Listener;
 import Model.Room;
 import Model.RoomLayout;
 
@@ -11,7 +12,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JScrollBar;
 import javax.swing.ScrollPaneConstants;
+
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
 import java.awt.BorderLayout;
@@ -25,17 +28,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class roomListPanel extends JPanel {
+public class roomListPanel extends JPanel implements Listener{
 
 	private Hotel model;
+	static DefaultListModel listModel;
 
 	/**
 	 * Create the panel.
 	 */
-	public roomListPanel(Hotel model) implements Listener {
+	public roomListPanel(Hotel model) {
 
 		this.model = model;
-		this.model.addListener(this);
+		model.addListener(this);
 
 		setName("Rooms");
 		
@@ -55,7 +59,7 @@ public class roomListPanel extends JPanel {
 		for(int i = 0; i < roomlist.size(); i++) {
 			Room r = roomlist.get(i);
 			//values[i] = r.toString();
-            listModel.addElement(e.toString());
+            listModel.addElement(r.toString());
 		}
 		JList<String> list = new JList<String>(listModel);
 		list.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -107,7 +111,6 @@ public class roomListPanel extends JPanel {
 				Room r = model.getRoom(list.getSelectedValue());
 				r.openRoom();
 				r.resolveIssue();
-				h.notifyListeners();
 			}
 		});
 		GridBagConstraints gbc_btnResolve = new GridBagConstraints();
@@ -125,7 +128,7 @@ public class roomListPanel extends JPanel {
         ArrayList<Room> roomlist = model.getRooms();
     	for(int i = 0; i < roomlist.size(); i++) {
     		Room r = roomlist.get(i);
-            listModel.addElement(e.toString()); 
+            listModel.addElement(r.toString()); 
     	}
 	}
 }
