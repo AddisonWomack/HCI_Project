@@ -220,6 +220,7 @@ public class Hotel {
     	if(r.isOpen())
     		numberOfVacantRooms--;
     	rooms.remove(r.getID());
+    	notifyListeners();
     }
 
     // adds a guest to the hotel
