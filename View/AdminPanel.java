@@ -187,7 +187,6 @@ public class AdminPanel extends JPanel implements Listener{
             public void actionPerformed(ActionEvent e) {
                 String pword = JOptionPane.showInputDialog(null, "Enter \"I understand that I am shutting down the hotel\" to Continue Hotel Shutdown.");
 
-                System.out.println(pword);
                 if (pword != null) {
                     if (model.shutDown(pword)) {
                         JOptionPane.showMessageDialog(null,"Hotel Shutdown Successful","Shutdown Successful", JOptionPane.PLAIN_MESSAGE);

@@ -5,23 +5,11 @@ import Model.Listener;
 import Model.Room;
 import Model.RoomLayout;
 
-import javax.swing.JPanel;
-import javax.swing.JList;
-import javax.swing.JComboBox;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JScrollBar;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 
 import java.awt.BorderLayout;
-import javax.swing.AbstractListModel;
-import javax.swing.ListSelectionModel;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -140,6 +128,39 @@ public class roomListPanel extends JPanel implements Listener{
 		add(roomInfo, gbc_roomInfo);
 		roomInfo.setToolTipText("Room information will appear here when a room is selected.");
 		scrollPane.setViewportView(list);
+
+		JButton btnCheckIn = new JButton("Check-In");
+		btnCheckIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (list.getSelectedValue() != null){
+					String rID = list.getSelectedValue().split(" ")[0];
+					model.checkInGuest(JOptionPane.showInputDialog(null, "Enter guest e-mail address"), model.getCurrentEmployee().getEMailAddress(), rID);
+				}
+			}
+		});
+		GridBagConstraints gbc_btnCheckIn = new GridBagConstraints();
+		gbc_btnCheckIn.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnCheckIn.gridx = 0;
+		gbc_btnCheckIn.gridy = 2;
+		add(btnCheckIn, gbc_btnCheckIn);
+		btnCheckIn.setToolTipText("Check in guest.");
+
+		JButton btnCheckOut = new JButton("Check-Out");
+		btnCheckOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (list.getSelectedValue() != null) {
+					String rID = list.getSelectedValue().split(" ")[0];
+					model.checkOutGuest(JOptionPane.showInputDialog(null, "Enter guest e-mail address"), rID);
+				}
+			}
+		});
+		GridBagConstraints gbc_btnCheckOut = new GridBagConstraints();
+		gbc_btnCheckOut.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnCheckOut.gridx = 1;
+		gbc_btnCheckOut.gridy = 2;
+		add(btnCheckOut, gbc_btnCheckOut);
+		btnResolve.setToolTipText("Check-Out");
+
 	}
 	
 	public void updated() {
