@@ -1,12 +1,19 @@
 package View;
 
 import org.jdatepicker.impl.*;
+
+import Model.Hotel;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.util.Properties;
 import java.awt.Color;
 
 public class CalendarPanel extends JPanel {
+
+	UtilDateModel utilModel = new UtilDateModel();
+	JDatePanelImpl datePanel;
+	public JDatePickerImpl datePicker;
 
 	/**
 	 * shut up compiler
@@ -16,20 +23,25 @@ public class CalendarPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public CalendarPanel() {
+	public CalendarPanel(Hotel model) {
+		setName("Reservations");
 		setLayout(new BorderLayout(0, 0));
-		
+
 		Properties p = new Properties();
-		p.put("text.day", "Day");
+		p.put("text.today", "Today");
 		p.put("text.month", "Month");
 		p.put("text.year", "Year");
-		
-		UtilDateModel model = new UtilDateModel();
-		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-		datePanel.setBackground(Color.WHITE);
-		
-		add(datePanel, BorderLayout.CENTER);
-		
-		
+
+		datePanel = new JDatePanelImpl(utilModel, p);
+
+		DateInfo dateInfo = new DateInfo(model, this);
+
+		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		datePicker.setBackground(Color.WHITE);
+
+		add(datePicker, BorderLayout.NORTH);
+		add(dateInfo, BorderLayout.CENTER);
+
+
 	}
 }
