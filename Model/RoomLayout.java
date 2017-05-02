@@ -4,10 +4,10 @@ package Model;
  * Created by Addison on 3/24/2017.
  */
 public enum RoomLayout {
-    BARGAINSUITE ((byte)002),
-    FAMILYSUITE ((byte)016),
-    JUNIORSUITE ((byte)012),
-    STANDARDSUITE ((byte)024),
+    BARGAINSUITE ((byte)2),
+    FAMILYSUITE ((byte)16),
+    JUNIORSUITE ((byte)12),
+    STANDARDSUITE ((byte)24),
     EXECUTIVESUITE ((byte)124);
 
     // single 8 bit integer that stores all data about the room layout
