@@ -266,23 +266,26 @@ public class Hotel {
         Guest guest = guests.get(guestEMail);
         Employee currentEmployee = employees.get(employeeEMail);
 
+        rooms.get(roomID).checkIn(guest,currentEmployee);
+        notifyListeners();
         // Checks a user into an available room corresponding to one of their reservations
-        for (int i = 0; i < guest.getReservations().size(); i++) {
-            if (rooms.get(roomID).getLayout() == guest.getReservations().get(i).getRequestedLayout() &&
-                    (rooms.get(roomID).checkIn(guest,currentEmployee))) {
-                guest.getReservations().remove(i);
-                numberOfVacantRooms--;
-                notifyListeners();
-                break;
-            }
-        }
+        //for (int i = 0; i < guest.getReservations().size(); i++) {
+          //  if (rooms.get(roomID).getLayout() == guest.getReservations().get(i).getRequestedLayout() &&
+            //        (rooms.get(roomID).checkIn(guest,currentEmployee))) {
+              //  guest.getReservations().remove(i);
+                //numberOfVacantRooms--;
+                //notifyListeners();
+                //break;
+            //}
+
     }
 
     // checks a guest out of the hotel
     public void checkOutGuest(String guestEmail, String roomID) {
         Guest guest = guests.get(guestEmail);
         numberOfVacantRooms += guest.getRoomsCheckedIn().size();
-        guest.getRoomsCheckedIn().forEach(r -> r.checkOut());
+        rooms.get(roomID).checkOut();
+        //guest.getRoomsCheckedIn().forEach(r -> r.checkOut());
         guests.remove(guest);
         notifyListeners();
     }

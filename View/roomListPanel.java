@@ -119,7 +119,7 @@ public class roomListPanel extends JPanel implements Listener{
 		add(btnResolve, gbc_btnResolve);
 		btnResolve.setToolTipText("If the issue with the room is resolved, click this button.");
 		
-		roomInfo = new RoomInfo(list);
+		roomInfo = new RoomInfo(list,model);
 		//roomInfo.setEditable(false);
 		GridBagConstraints gbc_roomInfo = new GridBagConstraints();
 		gbc_roomInfo.fill = GridBagConstraints.BOTH;
@@ -134,7 +134,9 @@ public class roomListPanel extends JPanel implements Listener{
 			public void actionPerformed(ActionEvent e) {
 				if (list.getSelectedValue() != null){
 					String rID = list.getSelectedValue().split(" ")[0];
-					model.checkInGuest(JOptionPane.showInputDialog(null, "Enter guest e-mail address"), model.getCurrentEmployee().getEMailAddress(), rID);
+					System.out.println("rID = " + rID);
+					String guestEmail = JOptionPane.showInputDialog(null, "Enter guest e-mail address");
+					model.checkInGuest(guestEmail, model.getCurrentEmployee().getEMailAddress(), rID);
 				}
 			}
 		});
@@ -150,7 +152,8 @@ public class roomListPanel extends JPanel implements Listener{
 			public void actionPerformed(ActionEvent e) {
 				if (list.getSelectedValue() != null) {
 					String rID = list.getSelectedValue().split(" ")[0];
-					model.checkOutGuest(JOptionPane.showInputDialog(null, "Enter guest e-mail address"), rID);
+					String guestEmail = JOptionPane.showInputDialog(null, "Enter guest e-mail address");
+					model.checkOutGuest(guestEmail, rID);
 				}
 			}
 		});
@@ -160,6 +163,20 @@ public class roomListPanel extends JPanel implements Listener{
 		gbc_btnCheckOut.gridy = 2;
 		add(btnCheckOut, gbc_btnCheckOut);
 		btnResolve.setToolTipText("Check-Out");
+
+		JButton btnissue = new JButton("Make Issue");
+		btnissue.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Room r = model.getRoom(list.getSelectedValue());
+				RoomIssueView newIssue = new RoomIssueView(r.getID(), model);
+			}
+		});
+		GridBagConstraints gbc_btnissue = new GridBagConstraints();
+		gbc_btnissue.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnissue.gridx = 3;
+		gbc_btnissue.gridy = 1;
+		add(btnissue, gbc_btnissue);
+		btnResolve.setToolTipText("If there is an issue with the room, click this button to fill in the issue.");
 
 	}
 	
