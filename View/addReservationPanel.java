@@ -14,9 +14,17 @@ import javax.swing.JOptionPane;
 
 import java.awt.Insets;
 import javax.swing.JTextField;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import javax.swing.JComboBox;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.Properties;
 import java.awt.event.ActionEvent;
 
 public class addReservationPanel extends JPanel {
@@ -40,6 +48,14 @@ public class addReservationPanel extends JPanel {
 	private JTextField textField_3;
 	private JLabel lblRequestedLayout;
 	private JComboBox<RoomLayout> comboBox;
+	
+	public JDatePickerImpl startdatePicker;
+	public JDatePickerImpl enddatePicker;
+	JDatePanelImpl startdatePanel;
+	JDatePanelImpl enddatePanel;
+	UtilDateModel startutilModel = new UtilDateModel();
+	UtilDateModel endutilModel = new UtilDateModel();
+
 	/**
 	 * Create the panel.
 	 */
@@ -49,6 +65,20 @@ public class addReservationPanel extends JPanel {
 
 		setName("Add Reservation");
 
+		Properties p = new Properties();
+		p.put("text.today", "Today");
+		p.put("text.month", "Month");
+		p.put("text.year", "Year");
+
+		startdatePanel = new JDatePanelImpl(startutilModel, p);
+		startdatePicker = new JDatePickerImpl(startdatePanel, new DateLabelFormatter());
+		startdatePicker.setBackground(Color.WHITE);
+
+		enddatePanel = new JDatePanelImpl(endutilModel, p);
+		enddatePicker = new JDatePickerImpl(enddatePanel, new DateLabelFormatter());
+		enddatePicker.setBackground(Color.WHITE);
+		
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -74,35 +104,16 @@ public class addReservationPanel extends JPanel {
 		gbc_lblStartDateddmmyyyy.gridy = 2;
 		add(lblStartDateddmmyyyy, gbc_lblStartDateddmmyyyy);
 		
-		day1 = new JTextField();
+		//day1 = new JTextField();
 		GridBagConstraints gbc_day1 = new GridBagConstraints();
+		gbc_day1.gridwidth = 3;
 		gbc_day1.insets = new Insets(0, 0, 5, 5);
 		gbc_day1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_day1.gridx = 1;
 		gbc_day1.gridy = 2;
-		add(day1, gbc_day1);
-		day1.setColumns(2);
-		day1.setToolTipText("Enter a day.");
-		
-		month1 = new JTextField();
-		GridBagConstraints gbc_month1 = new GridBagConstraints();
-		gbc_month1.insets = new Insets(0, 0, 5, 5);
-		gbc_month1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_month1.gridx = 2;
-		gbc_month1.gridy = 2;
-		add(month1, gbc_month1);
-		month1.setColumns(2);
-		month1.setToolTipText("Enter a month.");
-		
-		year1 = new JTextField();
-		GridBagConstraints gbc_year1 = new GridBagConstraints();
-		gbc_year1.insets = new Insets(0, 0, 5, 0);
-		gbc_year1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_year1.gridx = 3;
-		gbc_year1.gridy = 2;
-		add(year1, gbc_year1);
-		year1.setColumns(4);
-		year1.setToolTipText("Enter a year.");
+		add(startdatePicker, gbc_day1);
+		//day1.setColumns(2);
+		startdatePicker.setToolTipText("Enter a day.");
 		
 		JLabel lblEndDateddmmyyyy = new JLabel("End Date (DD/MM/YYYY)");
 		GridBagConstraints gbc_lblEndDateddmmyyyy = new GridBagConstraints();
@@ -112,35 +123,16 @@ public class addReservationPanel extends JPanel {
 		gbc_lblEndDateddmmyyyy.gridy = 3;
 		add(lblEndDateddmmyyyy, gbc_lblEndDateddmmyyyy);
 		
-		day2 = new JTextField();
+		//day2 = new JTextField();
 		GridBagConstraints gbc_day2 = new GridBagConstraints();
+		gbc_day2.gridwidth = 3;
 		gbc_day2.insets = new Insets(0, 0, 5, 5);
 		gbc_day2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_day2.gridx = 1;
 		gbc_day2.gridy = 3;
-		add(day2, gbc_day2);
-		day2.setColumns(2);
-		day2.setToolTipText("Enter a day.");
-		
-		month2 = new JTextField();
-		GridBagConstraints gbc_month2 = new GridBagConstraints();
-		gbc_month2.insets = new Insets(0, 0, 5, 5);
-		gbc_month2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_month2.gridx = 2;
-		gbc_month2.gridy = 3;
-		add(month2, gbc_month2);
-		month2.setColumns(2);
-		month2.setToolTipText("Enter a month.");
-		
-		year2 = new JTextField();
-		GridBagConstraints gbc_year2 = new GridBagConstraints();
-		gbc_year2.insets = new Insets(0, 0, 5, 0);
-		gbc_year2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_year2.gridx = 3;
-		gbc_year2.gridy = 3;
-		add(year2, gbc_year2);
-		year2.setColumns(4);
-		year2.setToolTipText("Enter a year.");
+		add(enddatePicker, gbc_day2);
+		//day2.setColumns(2);
+		enddatePicker.setToolTipText("Enter a day.");
 		
 		lblGuestEmail = new JLabel("Guest Email");
 		GridBagConstraints gbc_lblGuestEmail = new GridBagConstraints();
@@ -237,18 +229,24 @@ public class addReservationPanel extends JPanel {
 					model.addGuest(textField.getText(), textField_1.getText(), email, textField_3.getText());
 				}
 				try{
-					int sday = Integer.parseInt(day1.getText());
-					int smonth = Integer.parseInt(month1.getText());
-					int syear = Integer.parseInt(year1.getText());
-					int eday = Integer.parseInt(day2.getText());
-					int emonth = Integer.parseInt(month2.getText());
-					int eyear = Integer.parseInt(year2.getText());
-					if(sday > 31 || sday < 0 || smonth > 12 || smonth < 0 || eday > 31 || eday < 0 || emonth > 12 || emonth < 0)
+					String sdate = startdatePicker.getJFormattedTextField().getText();
+					String[] sArray = sdate.split("-");
+					
+					String edate = enddatePicker.getJFormattedTextField().getText();
+					String[] eArray = edate.split("-");
+					
+					int sday = Integer.parseInt(sArray[1]);
+					int smonth = Integer.parseInt(sArray[0]);
+					int syear = Integer.parseInt(sArray[2]);
+					int eday = Integer.parseInt(eArray[1]);
+					int emonth = Integer.parseInt(eArray[0]);
+					int eyear = Integer.parseInt(eArray[2]);
+					if(eyear < syear || (eyear == syear && emonth < smonth) || (eyear == syear && emonth == smonth && eday <= sday))
 						throw new Exception();
 					model.addReservation(syear, smonth, sday, eyear, emonth, eday, (RoomLayout)comboBox.getSelectedItem(), email, "sampleemployeeemail@idunno.com");
 				}
 				catch(Exception e) {
-					JOptionPane.showMessageDialog(addReservationPanel.this, "Enter a valid date.", "Date error",  JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(addReservationPanel.this, "Enter an end date that is after the start date.", "Date error",  JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
