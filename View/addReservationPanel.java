@@ -244,6 +244,7 @@ public class addReservationPanel extends JPanel {
 					if(eyear < syear || (eyear == syear && emonth < smonth) || (eyear == syear && emonth == smonth && eday <= sday))
 						throw new Exception();
 					model.addReservation(syear, smonth, sday, eyear, emonth, eday, (RoomLayout)comboBox.getSelectedItem(), email, "sampleemployeeemail@idunno.com");
+					JOptionPane.showMessageDialog(addReservationPanel.this, "Reservation added successfully");
 				}
 				catch(Exception e) {
 					JOptionPane.showMessageDialog(addReservationPanel.this, "Enter an end date that is after the start date.", "Date error",  JOptionPane.ERROR_MESSAGE);
