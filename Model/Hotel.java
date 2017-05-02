@@ -86,7 +86,16 @@ public class Hotel {
     }
 
     public ArrayList<Reservation> getReservationsByDate(int year, int month, int day) {
-        return reservations.get(new GregorianCalendar(year,month,day));
+    	GregorianCalendar greg = new GregorianCalendar(year, month, day);
+    	ArrayList<Reservation> alr = new ArrayList<Reservation>();
+    	for (GregorianCalendar gc: reservations.keySet()) {
+    		for (Reservation r: reservations.get(gc)) {
+    			if ((greg.after(gc) || greg.equals(gc)) && (greg.equals(gc) || greg.before(r.getEnd()))) {
+    				alr.add(r);
+    			}
+    		}
+    	}
+    	return alr;
     }
 
     public HashMap<String,Employee> getEmployees() {
