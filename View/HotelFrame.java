@@ -39,7 +39,7 @@ public class HotelFrame extends JFrame implements Listener {
 
         AdminPanel adminPanel = new AdminPanel(model);
 
-        CalendarPanel calendarPanel = new CalendarPanel();
+        CalendarPanel calendarPanel = new CalendarPanel(model);
 
         pane.add(loginPanel);
         pane.setToolTipTextAt(0,"menu for logging into your account");

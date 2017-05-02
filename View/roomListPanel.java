@@ -9,10 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JScrollBar;
 import javax.swing.ScrollPaneConstants;
-
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -32,6 +34,8 @@ public class roomListPanel extends JPanel implements Listener{
 
 	private Hotel model;
 	static DefaultListModel listModel;
+	private RoomInfo roomInfo;
+	private JList<String> list;
 
 	/**
 	 * Create the panel.
@@ -61,9 +65,16 @@ public class roomListPanel extends JPanel implements Listener{
 			//values[i] = r.toString();
             listModel.addElement(r.toString());
 		}
-		JList<String> list = new JList<String>(listModel);
+		list = new JList<String>(listModel);
 		list.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent arg0) {
+                if (!arg0.getValueIsAdjusting()) {
+                  roomInfo.updated();
+                }
+            }
+        });
 		scrollPane.setViewportView(list);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridwidth = 3;
@@ -120,6 +131,14 @@ public class roomListPanel extends JPanel implements Listener{
 		add(btnResolve, gbc_btnResolve);
 		btnResolve.setToolTipText("If the issue with the room is resolved, click this button.");
 		
+		roomInfo = new RoomInfo(list);
+		//roomInfo.setEditable(false);
+		GridBagConstraints gbc_roomInfo = new GridBagConstraints();
+		gbc_roomInfo.fill = GridBagConstraints.BOTH;
+		gbc_btnResolve.gridx = 1;
+		gbc_btnResolve.gridy = 1;
+		add(roomInfo, gbc_roomInfo);
+		roomInfo.setToolTipText("Room information will appear here when a room is selected.");
 		scrollPane.setViewportView(list);
 	}
 	
@@ -130,5 +149,6 @@ public class roomListPanel extends JPanel implements Listener{
     		Room r = roomlist.get(i);
             listModel.addElement(r.toString()); 
     	}
+    	//roomInfo.setText(list.getSelectedValue());
 	}
 }
