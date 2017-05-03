@@ -31,7 +31,7 @@ public class RoomIssueView extends JFrame {
 	 * Create the frame.
 	 */
 	public RoomIssueView(String roomNumber, Hotel h) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -62,7 +62,6 @@ public class RoomIssueView extends JFrame {
 		textField_2.setColumns(10);
 		
 		UtilDateModel model = new UtilDateModel();
-		model.setDate(27, 4, 2017);
 		Properties p = new Properties();
 		p.put("text.today", "Today");
 		p.put("text.month", "Month");
@@ -97,15 +96,17 @@ public class RoomIssueView extends JFrame {
 				issueStart.setYear(model.getYear());
 				RoomIssue r = new RoomIssue(issueStart, textField_2.getText());
 				try{
-					Date issueEnd = new Date();
-					issueEnd.setDate(model2.getDay());
-					issueEnd.setMonth(model2.getMonth());
-					issueEnd.setYear(model2.getYear());
+					Date issueEnd = new Date(model2.getYear(), model2.getMonth(), model2.getDay());
+					//issueEnd.setDate(model2.getDay());
+					//issueEnd.setMonth(model2.getMonth());
+					//issueEnd.setYear(model2.getYear());
+					if(model2.getDay() != new Date().getDay())
 					r.resolve(issueEnd);
 				} catch (Error e) {
 					
 				}
-				h.getRoom(roomNumber).addProblem(r, false);
+				h.getRoom(roomNumber + " ").addProblem(r, false);
+				setVisible(false);
 			}
 		});
 		contentPane.add(btnAddIssue);

@@ -24,4 +24,12 @@ public class RoomIssue {
         resolvedDate = d;
         isOngoing = false;
     }
+    
+    public String toString(){
+    	StringBuilder sb = new StringBuilder("Date of issue: " + reportDate.getMonth() + "/" + reportDate.getDay() + "/" + reportDate.getYear() + "\n");
+    	if(isOngoing) sb.append("Issue not resolved\n");
+    	else sb.append("Resolved: " + resolvedDate.getMonth() + "/" + resolvedDate.getDay() + "/" + resolvedDate.getYear() + "\n");
+    	sb.append("Description: " + description + "\n\n");
+    	return sb.toString();
+    }
 }

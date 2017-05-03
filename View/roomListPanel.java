@@ -169,6 +169,7 @@ public class roomListPanel extends JPanel implements Listener{
 			public void actionPerformed(ActionEvent e) {
 				Room r = model.getRoom(list.getSelectedValue());
 				RoomIssueView newIssue = new RoomIssueView(r.getID(), model);
+				newIssue.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnissue = new GridBagConstraints();

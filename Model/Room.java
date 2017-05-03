@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * This class represents an individual Room within the hotel.
@@ -65,6 +66,7 @@ public class Room {
     	for(RoomIssue ri : problemHistory) {
     		if (ri.isOngoing)
     			ri.isOngoing = false;
+    		ri.resolve(new Date());
     	}
     }
     
@@ -75,6 +77,10 @@ public class Room {
     // extra details about Room can be found within the layout class
     public RoomLayout getLayout() {
         return roomLayout;
+    }
+    
+    public ArrayList<RoomIssue> getIssues(){
+    	return problemHistory;
     }
     
     public boolean isOpen() {
