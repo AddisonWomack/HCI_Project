@@ -297,7 +297,7 @@ public class Hotel {
     }
 
     // Method that instructs all of the listeners within the list of listeners to update
-    private void notifyListeners()
+    public void notifyListeners()
     {
         listeners.forEach(l -> l.updated());
     }

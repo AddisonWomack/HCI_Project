@@ -106,6 +106,7 @@ public class RoomIssueView extends JFrame {
 					
 				}
 				h.getRoom(roomNumber + " ").addProblem(r, false);
+				h.notifyListeners();
 				setVisible(false);
 			}
 		});
