@@ -70,6 +70,7 @@ public class addReservationPanel extends JPanel {
 		p.put("text.month", "Month");
 		p.put("text.year", "Year");
 
+		// adds datepicker functionality
 		startdatePanel = new JDatePanelImpl(startutilModel, p);
 		startdatePicker = new JDatePickerImpl(startdatePanel, new DateLabelFormatter());
 		startdatePicker.setBackground(Color.WHITE);
