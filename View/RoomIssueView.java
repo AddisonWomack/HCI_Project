@@ -1,12 +1,12 @@
 package View;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.Properties;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -14,102 +14,119 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import Model.Hotel;
-import Model.Room;
 import Model.RoomIssue;
-
-import javax.swing.SpringLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 
 public class RoomIssueView extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField_2;
+	private JTextArea descriptionField;
+	private JDatePickerImpl startdatePicker;
+	private JDatePickerImpl enddatePicker;
+	private JDatePanelImpl startdatePanel;
+	private JDatePanelImpl enddatePanel;
+	private UtilDateModel startutilModel;
+	private UtilDateModel endutilModel;
 
 	/**
 	 * Create the frame.
 	 */
 	public RoomIssueView(String roomNumber, Hotel h) {
-		setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		SpringLayout sl_contentPane = new SpringLayout();
-		contentPane.setLayout(sl_contentPane);
-		
-		JLabel lblIssueName = new JLabel("Description: ");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblIssueName, 66, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblIssueName, 10, SpringLayout.WEST, contentPane);
-		contentPane.add(lblIssueName);
-		
-		JLabel lblDateOfIssue = new JLabel("Date of Issue:");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblDateOfIssue, 10, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblDateOfIssue, 0, SpringLayout.WEST, lblIssueName);
-		contentPane.add(lblDateOfIssue);
-		
-		JLabel lblDateOfResolution = new JLabel("Date of Resolution");
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblDateOfResolution, 0, SpringLayout.WEST, lblIssueName);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblDateOfResolution, -6, SpringLayout.NORTH, lblIssueName);
-		contentPane.add(lblDateOfResolution);
-		
-		textField_2 = new JTextField();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, textField_2, 6, SpringLayout.SOUTH, lblIssueName);
-		sl_contentPane.putConstraint(SpringLayout.WEST, textField_2, 10, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, textField_2, -10, SpringLayout.EAST, contentPane);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
-		
-		UtilDateModel model = new UtilDateModel();
+
+		setName("Report Room Issue");
+
 		Properties p = new Properties();
 		p.put("text.today", "Today");
 		p.put("text.month", "Month");
 		p.put("text.year", "Year");
-		JDatePanelImpl fred = new JDatePanelImpl(model, p);
-		JDatePickerImpl datePicker = new JDatePickerImpl(fred, null);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, datePicker, 0, SpringLayout.NORTH, lblDateOfIssue);
-		sl_contentPane.putConstraint(SpringLayout.WEST, datePicker, 6, SpringLayout.EAST, lblDateOfIssue);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, datePicker, -1, SpringLayout.NORTH, lblDateOfResolution);
-		contentPane.add(datePicker);
+
+		startutilModel = new UtilDateModel();
+		endutilModel = new UtilDateModel();
+
+		startdatePanel = new JDatePanelImpl(startutilModel, p);
+		startdatePicker = new JDatePickerImpl(startdatePanel, new DateLabelFormatter());
+		startdatePicker.setBackground(Color.WHITE);
+
+		enddatePanel = new JDatePanelImpl(endutilModel, p);
+		enddatePicker = new JDatePickerImpl(enddatePanel, new DateLabelFormatter());
+		enddatePicker.setBackground(Color.WHITE);
+
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		GridBagLayout layout = new GridBagLayout();
+		GridBagConstraints gbc = new GridBagConstraints();
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.ipadx = 5;
+		gbc.ipady = 5;
+		contentPane.setLayout(layout);
 		
-		UtilDateModel model2 = new UtilDateModel();
-		Properties p2 = new Properties();
-		p2.put("text.today", "Today");
-		p2.put("text.month", "Month");
-		p2.put("text.year", "Year");
-		JDatePanelImpl dp = new JDatePanelImpl(model2, p2);
-		JDatePickerImpl thatPicker = new JDatePickerImpl(dp, null);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, thatPicker, 0, SpringLayout.NORTH, lblDateOfResolution);
-		sl_contentPane.putConstraint(SpringLayout.WEST, thatPicker, 6, SpringLayout.EAST, lblDateOfResolution);
-		contentPane.add(thatPicker);
+
+		
+		JLabel lblDateOfIssue = new JLabel("Date of Issue:");
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		contentPane.add(lblDateOfIssue, gbc);
+
+
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		contentPane.add(startdatePicker, gbc);
+
+		JLabel lblDateOfResolution = new JLabel("Date of Resolution");
+
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		contentPane.add(lblDateOfResolution,gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		contentPane.add(enddatePicker, gbc);
+
+		JCheckBox severityCheckbox = new JCheckBox("Severe");
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		contentPane.add(severityCheckbox, gbc);
+
+		JLabel lblIssueName = new JLabel("Description: ");
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		contentPane.add(lblIssueName,gbc);
+
+		descriptionField = new JTextArea();
+		descriptionField.setEditable(true);
+		descriptionField.setToolTipText("Enter a description of the room issue here.");
+		gbc.gridwidth = 3;
+		gbc.gridheight = 2;
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		contentPane.add(descriptionField, gbc);
 		
 		JButton btnAddIssue = new JButton("Add Issue");
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnAddIssue, -10, SpringLayout.EAST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, textField_2, -6, SpringLayout.NORTH, btnAddIssue);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnAddIssue, -10, SpringLayout.SOUTH, contentPane);
+
+		gbc.gridheight = 1;
+		gbc.gridwidth = 1;
+		gbc.gridx = 0;
+		gbc.gridy = 6;
 		btnAddIssue.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent ae) {
 				Date issueStart = new Date();
-				issueStart.setDate(model.getDay());
-				issueStart.setMonth(model.getMonth());
-				issueStart.setYear(model.getYear());
-				RoomIssue r = new RoomIssue(issueStart, textField_2.getText());
+				issueStart.setDate(startutilModel.getDay());
+				issueStart.setMonth(startutilModel.getMonth());
+				issueStart.setYear(startutilModel.getYear());
+				RoomIssue r = new RoomIssue(issueStart, descriptionField.getText());
 				try{
-					Date issueEnd = new Date(model2.getYear(), model2.getMonth(), model2.getDay());
-					//issueEnd.setDate(model2.getDay());
-					//issueEnd.setMonth(model2.getMonth());
-					//issueEnd.setYear(model2.getYear());
-					if(model2.getDay() != new Date().getDay())
+					Date issueEnd = new Date(endutilModel.getYear(), endutilModel.getMonth(), endutilModel.getDay());
+					if(endutilModel.getDay() != new Date().getDay())
 					r.resolve(issueEnd);
 				} catch (Error e) {
 					
 				}
-				h.getRoom(roomNumber + " ").addProblem(r, false);
-				h.notifyListeners();
+				h.reportIssue(roomNumber,r, severityCheckbox.isSelected());
 				setVisible(false);
 			}
 		});
-		contentPane.add(btnAddIssue);
+		contentPane.add(btnAddIssue,gbc);
 	}
 }

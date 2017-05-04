@@ -7,9 +7,12 @@ import java.util.ArrayList;
  */
 public class Guest extends Person {
 
+    // list of rooms checked in to
     private ArrayList<Room> checkedIn;
+    // list of reservations held
     private ArrayList<Reservation> reservations;
 
+    // constructor
     public Guest(String firstName, String lastName, String eMailAddress, String phoneNumber){
         super(firstName, lastName, eMailAddress, phoneNumber);
         checkedIn = new ArrayList<>();
@@ -32,10 +35,12 @@ public class Guest extends Person {
         reservations.clear();
     }
 
+    // returns list of reservations
     public ArrayList<Reservation> getReservations() {
         return reservations;
     }
-    
+
+    // returns list of rooms checked in to
     public ArrayList<Room> getRoomsCheckedIn() {
         return checkedIn;
     }

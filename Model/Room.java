@@ -68,6 +68,7 @@ public class Room {
     			ri.isOngoing = false;
     		ri.resolve(new Date());
     	}
+    	if (problemHistory.isEmpty()) status = RoomStatus.OPEN;
     }
     
     public void setLayout(RoomLayout rl) {

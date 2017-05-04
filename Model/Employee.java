@@ -19,16 +19,20 @@ public class Employee extends Person {
         this.isAdmin = isAdmin;
     }
 
+    // sets employee password
     public void setPassword(String password) {this.password = password; }
 
+    // determines if password matches
     public boolean matchPassword (String password) {
         return (this.password.equals(password));
     }
 
+    // returns whether or not this employee is an admin
     public boolean isAdmin() {
         return isAdmin;
     }
 
+    // returns employees password
     public String getPassword() {
         return password;
     }

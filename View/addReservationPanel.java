@@ -266,5 +266,4 @@ public class addReservationPanel extends JPanel {
 		add(lblifNewGuest, gbc_lblifNewGuest);
 
 	}
-
 }

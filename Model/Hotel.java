@@ -81,6 +81,7 @@ public class Hotel {
         return employeeList;
     }
 
+    // returns list of reservations made
     public HashMap<GregorianCalendar, ArrayList<Reservation>> getReservations() {
         return reservations;
     }
@@ -98,22 +99,27 @@ public class Hotel {
     	return alr;
     }
 
+    // returns employees
     public HashMap<String,Employee> getEmployees() {
         return employees;
     }
 
+    // returns a specific employee
     public Employee getEmployee(String eMail) {
         return employees.get(eMail);
     }
 
+    // returns guests
     public HashMap<String,Guest> getGuests() {
         return guests;
     }
 
+    // returns a specific guest
     public Guest getGuest(String eMail) {
         return guests.get(eMail);
     }
 
+    // returns the current employee
     public Employee getCurrentEmployee() {
         return  currentEmployee;
     }
@@ -176,6 +182,18 @@ public class Hotel {
         } else {
             return false;
         }
+    }
+
+    public void reportIssue(String rID, RoomIssue issue, boolean isSevere) {
+        getRoom(rID).addProblem(issue,isSevere);
+        notifyListeners();
+    }
+
+    public void resolveRoomIssues(String rID) {
+        Room r = getRoom(rID);
+        r.resolveIssue();
+        r.openRoom();
+        notifyListeners();
     }
 
     // adds an employee to the hotel
@@ -267,16 +285,8 @@ public class Hotel {
         Employee currentEmployee = employees.get(employeeEMail);
 
         rooms.get(roomID).checkIn(guest,currentEmployee);
+        guest.getReservations().clear();
         notifyListeners();
-        // Checks a user into an available room corresponding to one of their reservations
-        //for (int i = 0; i < guest.getReservations().size(); i++) {
-          //  if (rooms.get(roomID).getLayout() == guest.getReservations().get(i).getRequestedLayout() &&
-            //        (rooms.get(roomID).checkIn(guest,currentEmployee))) {
-              //  guest.getReservations().remove(i);
-                //numberOfVacantRooms--;
-                //notifyListeners();
-                //break;
-            //}
 
     }
 
@@ -285,7 +295,6 @@ public class Hotel {
         Guest guest = guests.get(guestEmail);
         numberOfVacantRooms += guest.getRoomsCheckedIn().size();
         rooms.get(roomID).checkOut();
-        //guest.getRoomsCheckedIn().forEach(r -> r.checkOut());
         guests.remove(guest);
         notifyListeners();
     }
@@ -297,7 +306,7 @@ public class Hotel {
     }
 
     // Method that instructs all of the listeners within the list of listeners to update
-    public void notifyListeners()
+    private void notifyListeners()
     {
         listeners.forEach(l -> l.updated());
     }

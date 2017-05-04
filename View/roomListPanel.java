@@ -24,6 +24,9 @@ public class roomListPanel extends JPanel implements Listener{
 	static DefaultListModel listModel;
 	private RoomInfo roomInfo;
 	private JList<String> list;
+	private JButton btnED;
+	private JButton btnCreate;
+
 
 	/**
 	 * Create the panel.
@@ -73,7 +76,7 @@ public class roomListPanel extends JPanel implements Listener{
 		add(scrollPane, gbc_scrollPane);
 		scrollPane.setToolTipText("Please select a room from this list to view and edit its details.");
 		
-		JButton btnCreate = new JButton("Create");
+		btnCreate = new JButton("Create");
 		GridBagConstraints gbc_btnCreate = new GridBagConstraints();
 		gbc_btnCreate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnCreate.insets = new Insets(0, 0, 0, 5);
@@ -89,7 +92,7 @@ public class roomListPanel extends JPanel implements Listener{
 		});
 		btnCreate.setToolTipText("Create a room that previously didn't exist.");
 		
-		JButton btnED = new JButton("Edit/Delete");
+		btnED = new JButton("Edit/Delete");
 		btnED.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Room r = model.getRoom(list.getSelectedValue());
@@ -107,9 +110,9 @@ public class roomListPanel extends JPanel implements Listener{
 		JButton btnResolve = new JButton("Resolve Issue");
 		btnResolve.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Room r = model.getRoom(list.getSelectedValue());
-				r.openRoom();
-				r.resolveIssue();
+				if (list.getSelectedValue() != null) {
+					model.resolveRoomIssues(list.getSelectedValue());
+				}
 			}
 		});
 		GridBagConstraints gbc_btnResolve = new GridBagConstraints();
@@ -134,7 +137,6 @@ public class roomListPanel extends JPanel implements Listener{
 			public void actionPerformed(ActionEvent e) {
 				if (list.getSelectedValue() != null){
 					String rID = list.getSelectedValue().split(" ")[0];
-					System.out.println("rID = " + rID);
 					String guestEmail = JOptionPane.showInputDialog(null, "Enter guest e-mail address");
 					model.checkInGuest(guestEmail, model.getCurrentEmployee().getEMailAddress(), rID);
 				}
@@ -167,9 +169,10 @@ public class roomListPanel extends JPanel implements Listener{
 		JButton btnissue = new JButton("Make Issue");
 		btnissue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Room r = model.getRoom(list.getSelectedValue());
-				RoomIssueView newIssue = new RoomIssueView(r.getID(), model);
-				newIssue.setVisible(true);
+				if (list.getSelectedValue() != null) {
+					RoomIssueView newIssue = new RoomIssueView(list.getSelectedValue(), model);
+					newIssue.setVisible(true);
+				}
 			}
 		});
 		GridBagConstraints gbc_btnissue = new GridBagConstraints();
@@ -182,6 +185,10 @@ public class roomListPanel extends JPanel implements Listener{
 	}
 	
 	public void updated() {
+		if (model.getCurrentEmployee() != null) {
+			btnCreate.setEnabled(model.getCurrentEmployee().isAdmin());
+			btnED.setEnabled(model.getCurrentEmployee().isAdmin());
+		}
 		listModel.removeAllElements();
         ArrayList<Room> roomlist = model.getRooms();
     	for(int i = 0; i < roomlist.size(); i++) {
